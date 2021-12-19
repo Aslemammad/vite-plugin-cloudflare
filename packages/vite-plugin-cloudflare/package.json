@@ -1,0 +1,42 @@
+{
+  "name": "vite-plugin-cloudflare",
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "build": "rimraf dist && rollup -c",
+    "dev": "rollup -c --watch src"
+  },
+  "bin": {
+    "vite-plugin-cloudflare": "./bin/vite-plugin-cloudflare.mjs"
+  },
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist",
+    "bin",
+    "*.d.ts"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aslemammad/tinyspy.git"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/aslemammad/vite-plugin-cloudflare/issues"
+  },
+  "homepage": "https://github.com/aslemammad/vite-plugin-cloudflare#readme",
+  "devDependencies": {
+    "typescript": "^4.5.3",
+    "vite": "2.7.0"
+  },
+  "peerDependencies": {
+    "vite": "^2.7.1"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "dependencies": {
+    "cac": "^6.7.12"
+  }
+}
