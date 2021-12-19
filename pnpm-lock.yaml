@@ -46,6 +46,9 @@ importers:
   test/basic:
     specifiers:
       miniflare: ^1.4.1
+      vite-plugin-cloudflare: workspace:^0.0.0
+    dependencies:
+      vite-plugin-cloudflare: link:../../packages/vite-plugin-cloudflare
     devDependencies:
       miniflare: 1.4.1
 
