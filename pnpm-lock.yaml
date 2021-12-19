@@ -11,21 +11,23 @@ importers:
       cross-env: ^7.0.3
       execa: ^6.0.0
       rimraf: ^3.0.2
+      rollup: ^2.61.1
       rollup-plugin-dts: ^4.0.1
       rollup-plugin-esbuild: ^4.7.2
       typescript: ^4.5.3
       vite: ^2.7.1
       vitest: ^0.0.97
     devDependencies:
-      '@rollup/plugin-alias': 3.1.8
-      '@rollup/plugin-commonjs': 21.0.1
-      '@rollup/plugin-json': 4.1.0
-      '@rollup/plugin-node-resolve': 13.1.1
+      '@rollup/plugin-alias': 3.1.8_rollup@2.61.1
+      '@rollup/plugin-commonjs': 21.0.1_rollup@2.61.1
+      '@rollup/plugin-json': 4.1.0_rollup@2.61.1
+      '@rollup/plugin-node-resolve': 13.1.1_rollup@2.61.1
       cross-env: 7.0.3
       execa: 6.0.0
       rimraf: 3.0.2
-      rollup-plugin-dts: 4.0.1_typescript@4.5.4
-      rollup-plugin-esbuild: 4.7.2
+      rollup: 2.61.1
+      rollup-plugin-dts: 4.0.1_rollup@2.61.1+typescript@4.5.4
+      rollup-plugin-esbuild: 4.7.2_rollup@2.61.1
       typescript: 4.5.4
       vite: 2.7.3
       vitest: 0.0.97_vite@2.7.3
@@ -139,53 +141,57 @@ packages:
       webcrypto-core: 1.4.0
     dev: true
 
-  /@rollup/plugin-alias/3.1.8:
+  /@rollup/plugin-alias/3.1.8_rollup@2.61.1:
     resolution: {integrity: sha512-tf7HeSs/06wO2LPqKNY3Ckbvy0JRe7Jyn98bXnt/gfrxbe+AJucoNJlsEVi9sdgbQtXemjbakCpO/76JVgnHpA==}
     engines: {node: '>=8.0.0'}
     peerDependencies:
       rollup: ^1.20.0||^2.0.0
     dependencies:
+      rollup: 2.61.1
       slash: 3.0.0
     dev: true
 
-  /@rollup/plugin-commonjs/21.0.1:
+  /@rollup/plugin-commonjs/21.0.1_rollup@2.61.1:
     resolution: {integrity: sha512-EA+g22lbNJ8p5kuZJUYyhhDK7WgJckW5g4pNN7n4mAFUM96VuwUnNT3xr2Db2iCZPI1pJPbGyfT5mS9T1dHfMg==}
     engines: {node: '>= 8.0.0'}
     peerDependencies:
       rollup: ^2.38.3
     dependencies:
-      '@rollup/pluginutils': 3.1.0
+      '@rollup/pluginutils': 3.1.0_rollup@2.61.1
       commondir: 1.0.1
       estree-walker: 2.0.2
       glob: 7.2.0
       is-reference: 1.2.1
       magic-string: 0.25.7
       resolve: 1.20.0
+      rollup: 2.61.1
     dev: true
 
-  /@rollup/plugin-json/4.1.0:
+  /@rollup/plugin-json/4.1.0_rollup@2.61.1:
     resolution: {integrity: sha512-yfLbTdNS6amI/2OpmbiBoW12vngr5NW2jCJVZSBEz+H5KfUJZ2M7sDjk0U6GOOdCWFVScShte29o9NezJ53TPw==}
     peerDependencies:
       rollup: ^1.20.0 || ^2.0.0
     dependencies:
-      '@rollup/pluginutils': 3.1.0
+      '@rollup/pluginutils': 3.1.0_rollup@2.61.1
+      rollup: 2.61.1
     dev: true
 
-  /@rollup/plugin-node-resolve/13.1.1:
+  /@rollup/plugin-node-resolve/13.1.1_rollup@2.61.1:
     resolution: {integrity: sha512-6QKtRevXLrmEig9UiMYt2fSvee9TyltGRfw+qSs6xjUnxwjOzTOqy+/Lpxsgjb8mJn1EQNbCDAvt89O4uzL5kw==}
     engines: {node: '>= 10.0.0'}
     peerDependencies:
       rollup: ^2.42.0
     dependencies:
-      '@rollup/pluginutils': 3.1.0
+      '@rollup/pluginutils': 3.1.0_rollup@2.61.1
       '@types/resolve': 1.17.1
       builtin-modules: 3.2.0
       deepmerge: 4.2.2
       is-module: 1.0.0
       resolve: 1.20.0
+      rollup: 2.61.1
     dev: true
 
-  /@rollup/pluginutils/3.1.0:
+  /@rollup/pluginutils/3.1.0_rollup@2.61.1:
     resolution: {integrity: sha512-GksZ6pr6TpIjHm8h9lSQ8pi8BE9VeubNT0OMJ3B5uZJ8pz73NPiqOtCog/x2/QzM1ENChPKxMDhiQuRHsqc+lg==}
     engines: {node: '>= 8.0.0'}
     peerDependencies:
@@ -194,6 +200,7 @@ packages:
       '@types/estree': 0.0.39
       estree-walker: 1.0.1
       picomatch: 2.3.0
+      rollup: 2.61.1
     dev: true
 
   /@rollup/pluginutils/4.1.2:
@@ -1273,7 +1280,7 @@ packages:
       glob: 7.2.0
     dev: true
 
-  /rollup-plugin-dts/4.0.1_typescript@4.5.4:
+  /rollup-plugin-dts/4.0.1_rollup@2.61.1+typescript@4.5.4:
     resolution: {integrity: sha512-DNv5F8pro/r0Hkx3JWKRtJZocDnqXfgypoajeiaNq134rYaFcEIl/oas5PogD1qexMadVijsHyVko1Chig0OOQ==}
     engines: {node: '>=v12.22.6'}
     peerDependencies:
@@ -1281,12 +1288,13 @@ packages:
       typescript: ^4.4.2
     dependencies:
       magic-string: 0.25.7
+      rollup: 2.61.1
       typescript: 4.5.4
     optionalDependencies:
       '@babel/code-frame': 7.16.0
     dev: true
 
-  /rollup-plugin-esbuild/4.7.2:
+  /rollup-plugin-esbuild/4.7.2_rollup@2.61.1:
     resolution: {integrity: sha512-rBS2hTedtG+wL/yyIWQ84zju5rtfF15gkaCLN0vsWGmBdRd0UPm52meAwkmrsPQf3mB/H2o+k9Q8Ce8A66SE5A==}
     engines: {node: '>=12'}
     peerDependencies:
@@ -1296,6 +1304,7 @@ packages:
       '@rollup/pluginutils': 4.1.2
       joycon: 3.1.1
       jsonc-parser: 3.0.0
+      rollup: 2.61.1
     dev: true
 
   /rollup/2.61.1:
