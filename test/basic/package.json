@@ -1,7 +1,7 @@
 {
   "main": "./dist/index.js",
   "scripts": {
-    "build": "vite-plugin-cloudflare build ./index.ts --outputDir ./dist/",
+    "build": "rimraf dist/ && vite-plugin-cloudflare build ./index.ts --outputDir ./dist/",
     "run": "miniflare"
   },
   "devDependencies": {

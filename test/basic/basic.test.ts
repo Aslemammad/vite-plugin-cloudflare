@@ -1,4 +1,4 @@
-import { dirname, resolve } from "path";
+import { dirname } from "path";
 import { fileURLToPath } from "url";
 import { beforeEach, expect, test } from "vitest";
 import { execaSync as execa } from "execa";
@@ -11,12 +11,11 @@ execa("npm", ["run", "build"], { cwd: __dirname, stdio: "inherit" });
 let mf: Miniflare;
 
 beforeEach(() => {
-  console.log(resolve(__dirname, "./dist/index.js"));
   mf = new Miniflare();
 });
 
 test("basic", async () => {
-  const res = await mf.dispatchFetch("http://localhost:8787/a");
+  const res = await mf.dispatchFetch("http://localhost:8787");
 
   expect(await res.text()).toBe("hello world");
 });

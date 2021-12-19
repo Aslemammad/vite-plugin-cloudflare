@@ -4,7 +4,8 @@
   "type": "module",
   "scripts": {
     "build": "rimraf dist && rollup -c",
-    "dev": "rollup -c --watch src"
+    "dev": "rollup -c --watch src",
+    "typecheck": "tsc --noEmit"
   },
   "bin": {
     "vite-plugin-cloudflare": "./bin/vite-plugin-cloudflare.mjs"
