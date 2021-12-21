@@ -10,45 +10,37 @@ const root = process.cwd();
 
 cli
   .version(version)
-  .command("build <input>", "build worker")
-  .option("--outputDir <outputDir>", "output directory")
-  .option("--outputFile <outputDir>", "output file name without extension")
+  .command("build <input> <output>", "build worker")
   .action(
     async (
       input: string,
-      options: { outputDir?: string; outputFile?: string }
+      output: string,
     ) => {
-      const outputDir = options.outputDir || path.dirname(input);
-      console.log(esbuild.build);
-
-      const outFile = path.join(outputDir, options.outputFile || path.parse(input).name) + '.js'
       await esbuild.build({
         banner: {
-          js: getShim(path.join(root, outputDir, (options.outputFile || '') + '.js')),
+          js: getShim(path.join(root, output)),
         },
         plugins: [plugin],
         platform: "node",
-        outfile: outFile,
+        outfile: output,
         format: "esm",
+        loader:{},
         entryPoints: [input],
-        // treeShaking: true,
         sourcemap: "inline",
         bundle: true,
         write: true,
-        // plugins: [moduleLoader],
       });
+
       await esbuild.build({
         allowOverwrite: true,
         plugins: [plugin],
         platform: "node",
-        outfile: outFile,
+        outfile: output,
         format: "esm",
-        entryPoints: [outFile],
-        // treeShaking: true,
+        entryPoints: [output],
         sourcemap: "inline",
         bundle: true,
         write: true,
-        // plugins: [moduleLoader],
       });
     }
   );

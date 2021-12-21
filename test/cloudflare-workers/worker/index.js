@@ -2,6 +2,7 @@ import { handleSsr } from './ssr'
 import { handleStaticAssets } from './static-assets'
 
 addEventListener('fetch', (event) => {
+
   try {
     event.respondWith(
       handleFetchEvent(event).catch((err) => {

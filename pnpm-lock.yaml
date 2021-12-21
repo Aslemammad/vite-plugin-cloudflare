@@ -8,8 +8,10 @@ importers:
       '@rollup/plugin-commonjs': ^21.0.1
       '@rollup/plugin-json': ^4.1.0
       '@rollup/plugin-node-resolve': ^13.1.1
+      buffer-es6: ^4.9.3
       cross-env: ^7.0.3
       execa: ^6.0.0
+      process-es6: ^0.11.6
       rimraf: ^3.0.2
       rollup: ^2.61.1
       rollup-plugin-dts: ^4.0.1
@@ -22,8 +24,10 @@ importers:
       '@rollup/plugin-commonjs': 21.0.1_rollup@2.61.1
       '@rollup/plugin-json': 4.1.0_rollup@2.61.1
       '@rollup/plugin-node-resolve': 13.1.1_rollup@2.61.1
+      buffer-es6: 4.9.3
       cross-env: 7.0.3
       execa: 6.0.0
+      process-es6: 0.11.6
       rimraf: 3.0.2
       rollup: 2.61.1
       rollup-plugin-dts: 4.0.1_rollup@2.61.1+typescript@4.5.4
@@ -784,7 +788,6 @@ packages:
 
   /buffer-es6/4.9.3:
     resolution: {integrity: sha1-8mNHuC33b9N+GLy1KIxJcM/VxAQ=}
-    dev: false
 
   /buffer-from/1.1.2:
     resolution: {integrity: sha512-E+XQCRwSbaaiChtv6k6Dwgc+bx+Bs6vuKJHHl5kox/BaKbhiXzqQOwK4cO22yElGp2OCmjwVhT3HmxgyPGnJfQ==}
@@ -2384,7 +2387,6 @@ packages:
 
   /process-es6/0.11.6:
     resolution: {integrity: sha1-xrs4n5qVH4K9TrFpYAEFvS/5x3g=}
-    dev: false
 
   /process-nextick-args/2.0.1:
     resolution: {integrity: sha512-3ouUOpQhtgrbOa17J7+uxOTpITYWaGP7/AhoR3+A+/1e9skrzelGi/dXzEYyvbxubEF6Wn2ypscTKiKJFFn1ag==}

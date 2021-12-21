@@ -12,7 +12,7 @@
     "// Build scripts": "",
     "build": "npm run build:vite && npm run build:worker",
     "build:vite": "vite build && vite build --ssr",
-    "build:worker": "vite-plugin-cloudflare build worker/index.js --outputDir dist/ --outputFile worker"
+    "build:worker": "vite-plugin-cloudflare build worker/index.js dist/worker.js"
   },
   "dependencies": {
     "@cloudflare/kv-asset-handler": "~0.2.0",
