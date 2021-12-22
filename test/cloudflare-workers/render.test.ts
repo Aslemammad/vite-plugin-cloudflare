@@ -1,62 +1,82 @@
-import { beforeEach, expect, test } from "vitest";
+import type { Server } from "http";
+import {
+  describe,
+  afterAll,
+  beforeAll,
+  expect,
+  test,
+} from "vitest";
+import puppeteer from "puppeteer";
 import { execaSync as execa } from "execa";
 import { Miniflare } from "miniflare";
 
-// const isMiniflare = cmd === "npm run dev:miniflare";
-// const isWrangler = cmd === "npm run prod";
-// const isWorker = isMiniflare || isWrangler;
+describe("render", async () => {
+  const url = "http://localhost:8787";
+  let mf: Miniflare;
 
-// {
-//   const additionalTimeout = !isWorker ? 0 : (isGithubAction() ? 2 : 1) * 120 * 1000
-//   const serverIsReadyMessage = (() => {
-//     if (isMiniflare) {
-//       return 'Listening on :3000'
-//     }
-//     if (isWrangler) {
-//       return 'Ignoring stale first change'
-//     }
-//     assert(!isWorker)
-//     // Express.js dev server
-//     return undefined
-//   })()
-//   const serverIsReadyDelay = isWorker ? 5000 : undefined
-//   run(cmd, { additionalTimeout, serverIsReadyMessage, serverIsReadyDelay })
-// }
+  let browser: puppeteer.Browser;
+  let page: puppeteer.Page;
+  let server: Server;
+  beforeAll(async () => {
+    execa("npm", ["run", "build"], { cwd: __dirname, stdio: "inherit" });
+    mf = new Miniflare();
+    browser = await puppeteer.launch();
+    page = await browser.newPage();
+    server = mf.createServer();
+    server.listen(8787).on("connect", () => {
+      console.log("helo");
+    });
+  });
+  afterAll(async () => {
+    await browser.close();
+    server.close();
+  });
 
-execa("npm", ["run", "build"], { cwd: __dirname, stdio: "inherit" });
+  test("page content is rendered to HTML", async () => {
+    await page.goto(url);
+    expect(await page.content()).toContain("<h1>Welcome</h1>");
+  });
 
-let mf: Miniflare;
+  test("page is rendered to the DOM and interactive", async () => {
+    try {
+      await page.goto(url);
+      const h1Text = await (
+        await page.$("h1")
+      )?.evaluate((el) => el.textContent);
+      expect(h1Text).toBe("Welcome");
+      {
+        const buttonText = await (
+          await page.$("button")
+        )?.evaluate((el) => el.textContent);
+        expect(buttonText).toBe("Counter 0");
+      }
+      {
+        await page.click("button");
+        const buttonText = await (
+          await page.$("button")
+        )?.evaluate((el) => el.textContent);
+        expect(buttonText).toBe("Counter 1");
+      }
+    } catch (e) {
+      console.error(e);
+      expect(e).toBeUndefined();
+    }
+  });
 
-beforeEach(() => {
-  mf = new Miniflare();
+  test("about page", async () => {
+    await page.click('a[href="/about"]');
+
+    const h1Text = await (await page.$("h1"))?.evaluate((el) => el.textContent);
+    expect(h1Text).toBe("About");
+  });
+
+  test("data fetching", async () => {
+    await page.click('a[href="/star-wars"]');
+    const h1Text = await (await page.$("h1"))?.evaluate((el) => el.textContent);
+    expect(h1Text).toBe("Star Wars Movies");
+    const bodyText = await (
+      await page.$("body")
+    )?.evaluate((el) => el.textContent);
+    expect(bodyText).toContain("The Phantom Menace");
+  });
 });
-// test('page content is rendered to HTML', async () => {
-//   const html = await fetchHtml('/')
-//   expect(html).toContain('<h1>Welcome</h1>')
-// })
-//
-// test('page is rendered to the DOM and interactive', async () => {
-//   await page.goto(urlBase + '/')
-//   expect(await page.textContent('h1')).toBe('Welcome')
-//   expect(await page.textContent('button')).toBe('Counter 0')
-//   // `autoRetry` because browser-side code may not be loaded yet
-//   await autoRetry(async () => {
-//     await page.click('button')
-//     expect(await page.textContent('button')).toBe('Counter 1')
-//   })
-// })
-//
-// test('about page', async () => {
-//   await page.click('a[href="/about"]')
-//   expect(await page.textContent('h1')).toBe('About')
-// })
-
-// if (hasStarWarsPage) {
-//   test('data fetching', async () => {
-//     await page.click('a[href="/star-wars"]')
-//     await autoRetry(async () => {
-//       expect(await page.textContent('h1')).toBe('Star Wars Movies')
-//     })
-//     expect(await page.textContent('body')).toContain('The Phantom Menace')
-//   })
-// }
