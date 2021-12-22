@@ -29,6 +29,7 @@ cli
         sourcemap: "inline",
         bundle: true,
         write: true,
+        minify: true
       });
 
       await esbuild.build({
@@ -41,6 +42,7 @@ cli
         sourcemap: "inline",
         bundle: true,
         write: true,
+        minify: true
       });
     }
   );
