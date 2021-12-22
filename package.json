@@ -6,7 +6,7 @@
   "scripts": {
     "build": "pnpm -r --filter {packages} run build",
     "dev": "pnpm -r --parallel --filter {packages} run dev",
-    "test": "vitest -r test/basic",
+    "test:core": "vitest -r test/basic",
     "test:all": "cross-env pnpm -r --stream run test --",
     "test:ci": "cross-env CI=true pnpm -r --stream run test --",
     "typecheck": "pnpm -r --parallel run typecheck",

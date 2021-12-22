@@ -1,6 +1,7 @@
 {
   "main": "./dist/worker.js",
   "scripts": {
+    "test": "vitest",
     "// For increased dev speed we use an Express.js dev server instead of wrangler": "",
     "dev": "node ./dev-server",
     "// Use miniflare to simulate Cloudflare Workers environment": "",

@@ -1,6 +1,7 @@
 {
   "main": "./dist/index.js",
   "scripts": {
+    "test": "vitest",
     "build": "rimraf dist/ && vite-plugin-cloudflare build ./index.ts ./dist/index.js",
     "run": "miniflare"
   },
