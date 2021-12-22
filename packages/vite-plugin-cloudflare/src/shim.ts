@@ -1,6 +1,6 @@
 import { dirname } from "path";
 
-export const getShim = (filename) => `
+export const getShim = (filename: string) => `
 import process from "process-es6"
 import { Buffer } from "buffer-es6"
 
