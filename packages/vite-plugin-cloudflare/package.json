@@ -3,8 +3,9 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "build": "rimraf dist && rollup -c",
-    "dev": "rollup -c --watch src",
+    "shim": " esbuild src/shimmed.ts  --outfile=dist/shimmed.js --bundle --format=esm --platform=node --minify",
+    "build": "rimraf dist && pnpm run shim && rollup -c",
+    "dev": "pnpm run shim && rollup -c --watch src",
     "typecheck": "tsc --noEmit"
   },
   "bin": {
@@ -13,6 +14,15 @@
   "main": "./dist/index.js",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./shimmed": {
+      "import": "./dist/shimmed.js"
+    }
+  },
   "files": [
     "dist",
     "bin",
@@ -43,6 +53,7 @@
     "buffer-es6": "^4.9.3",
     "cac": "^6.7.12",
     "esbuild": "^0.14.6",
+    "mlly": "^0.3.16",
     "process-es6": "^0.11.6",
     "rollup-plugin-node-builtins": "^2.1.2",
     "rollup-plugin-node-globals": "^1.4.0"

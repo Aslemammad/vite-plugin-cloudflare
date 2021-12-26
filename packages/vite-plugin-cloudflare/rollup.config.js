@@ -16,7 +16,8 @@ const external = [
   'worker_threads',
   'esbuild',
   'rollup-plugin-node-builtins',
-  'rollup-plugin-node-globals'
+  'rollup-plugin-node-globals',
+  'fs/promises'
 ]
 
 export default [

@@ -1,6 +1,5 @@
 # wrangler.toml
 name = "vite-ssr-worker"
-  
 
 [site]
 bucket = "./dist/client"

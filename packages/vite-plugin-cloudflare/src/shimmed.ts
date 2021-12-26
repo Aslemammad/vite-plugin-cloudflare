@@ -1,6 +1,4 @@
-import { dirname } from "path";
-
-export const getShim = (filename: string) => `
+// @ts-nocheck
 import process from "process-es6"
 import { Buffer } from "buffer-es6"
 
@@ -9,7 +7,3 @@ globalThis.global = (typeof global !== "undefined" ? global :
             typeof window !== "undefined" ? window : {});
 globalThis.process = process;
 globalThis.Buffer = Buffer;
-globalThis.__filename = "${filename}";
-globalThis.__dirname = "${dirname(filename)}";
-
-`;

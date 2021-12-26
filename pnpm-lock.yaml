@@ -47,6 +47,7 @@ importers:
       buffer-es6: ^4.9.3
       cac: ^6.7.12
       esbuild: ^0.14.6
+      mlly: ^0.3.16
       process-es6: ^0.11.6
       rollup-plugin-node-builtins: ^2.1.2
       rollup-plugin-node-globals: ^1.4.0
@@ -56,6 +57,7 @@ importers:
       buffer-es6: 4.9.3
       cac: 6.7.12
       esbuild: 0.14.6
+      mlly: 0.3.16
       process-es6: 0.11.6
       rollup-plugin-node-builtins: 2.1.2
       rollup-plugin-node-globals: 1.4.0
@@ -2337,6 +2339,10 @@ packages:
     dependencies:
       import-meta-resolve: 1.1.1
     dev: true
+
+  /mlly/0.3.16:
+    resolution: {integrity: sha512-DVydmuR8fmiMetH39kp8VXYslN0XDh+OxULuU/ov8TMwVIxDGQ8PsJIrNi6cZZaHiIYL6wtO6+sjGpVc7msKUg==}
+    dev: false
 
   /ms/2.0.0:
     resolution: {integrity: sha1-VgiurfwAvmwpAd9fmGF4jeDVl8g=}
