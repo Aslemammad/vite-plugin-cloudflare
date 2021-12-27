@@ -9,7 +9,8 @@
     "typecheck": "tsc --noEmit"
   },
   "bin": {
-    "vite-plugin-cloudflare": "./bin/vite-plugin-cloudflare.mjs"
+    "vite-plugin-cloudflare": "./bin/vite-plugin-cloudflare.mjs",
+    "vpc": "./bin/vite-plugin-cloudflare.mjs"
   },
   "main": "./dist/index.js",
   "module": "./dist/index.js",
@@ -56,6 +57,7 @@
     "mlly": "^0.3.16",
     "process-es6": "^0.11.6",
     "rollup-plugin-node-builtins": "^2.1.2",
-    "rollup-plugin-node-globals": "^1.4.0"
+    "rollup-plugin-node-globals": "^1.4.0",
+    "vite-plugin-cloudflare": "^0.0.0"
   }
 }

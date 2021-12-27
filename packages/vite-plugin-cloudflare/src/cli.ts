@@ -1,42 +1,64 @@
 import esbuild from "esbuild";
 import path from "path";
 import cac from "cac";
+import c from "picocolors";
 import { version } from "../package.json";
 import { plugin } from "./plugin";
 import { resolve, fileURLToPath } from "mlly";
 import { dirname } from "path";
 import { readFile } from "fs/promises";
+import { createServer, ViteDevServer } from "vite";
+import { build } from "./build";
 
 const cli = cac("vite-plugin-cloudflare");
 const root = process.cwd();
 
 cli
-  .version(version)
   .command("build <input> <output>", "build worker")
   .action(async (input: string, output: string) => {
-    const shimFile = fileURLToPath(
-      await resolve("vite-plugin-cloudflare/shimmed")
-    );
-    await esbuild.build({
-      banner: {
-        js: `${await readFile(shimFile, "utf8")}\n
-            globalThis.__filename = "${path.join(root, output)}";
-            globalThis.__dirname = "${dirname(path.join(root, output))}";
+    try {
+      console.log(c.green(`Building ${c.bold(input)}`));
 
-        `,
-      },
-      plugins: [plugin],
-      platform: "node",
-      outfile: output,
-      format: "esm",
-      loader: {},
-      entryPoints: [input],
-      sourcemap: "inline",
-      bundle: true,
-      write: true,
-      minify: true,
-    });
+      await build({
+        outfile: output,
+        entryPoints: [input],
+      });
+
+      console.log(c.green(`Built ${c.bold(output)}`));
+    } catch (e) {
+      console.error(c.red("Failed to build. \n" + String(e)));
+      process.exit(1);
+    }
   });
 
+cli
+  .command("dev <input> <output>")
+  .action(async (input: string, output: string) => {
+    console.log("hello");
+    let server: ViteDevServer;
+    try {
+      server = await createServer({
+        root: process.cwd(),
+        mode: "dev",
+
+        server: {
+          watch: {},
+          hmr: true,
+        },
+        plugins: [
+          {
+            name: "vite-plugin-cloudflare",
+            handleHotUpdate({ file }) {
+              console.log("here", file);
+            },
+          },
+        ],
+      });
+
+      server.listen(3000);
+    } catch (e: any) {}
+  });
+
+cli.version(version);
 cli.help();
 cli.parse();

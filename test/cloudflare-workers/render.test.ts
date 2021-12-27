@@ -1,14 +1,28 @@
 import type { Server } from "http";
-import {
-  describe,
-  afterAll,
-  beforeAll,
-  expect,
-  test,
-} from "vitest";
+import { describe, afterAll, beforeAll, expect, test } from "vitest";
 import puppeteer from "puppeteer";
 import { execaSync as execa } from "execa";
 import { Miniflare } from "miniflare";
+
+const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
+
+async function autoRetry(test: () => void | Promise<void>): Promise<void> {
+  const period = 100;
+  const numberOfTries = 1000 / period;
+  let i = 0;
+  while (true) {
+    try {
+      await test();
+      return;
+    } catch (err) {
+      i = i + 1;
+      if (i > numberOfTries) {
+        throw err;
+      }
+    }
+    await sleep(period);
+  }
+}
 
 describe("render", async () => {
   const url = "http://localhost:8787";
@@ -66,14 +80,24 @@ describe("render", async () => {
   test("about page", async () => {
     await page.click('a[href="/about"]');
 
-    const h1Text = await (await page.$("h1"))?.evaluate((el) => el.textContent);
-    expect(h1Text).toBe("About");
+    autoRetry(async () => {
+      const h1Text = await (
+        await page.$("h1")
+      )?.evaluate((el) => el.textContent);
+      expect(h1Text).toBe("About");
+    });
   });
 
   test("data fetching", async () => {
     await page.click('a[href="/star-wars"]');
-    const h1Text = await (await page.$("h1"))?.evaluate((el) => el.textContent);
-    expect(h1Text).toBe("Star Wars Movies");
+    autoRetry(async () => {
+      const h1Text = await (
+        await page.$("h1")
+      )?.evaluate((el) => el.textContent);
+      console.log(h1Text);
+      expect(h1Text).toBe("Star Wars Movies");
+    });
+
     const bodyText = await (
       await page.$("body")
     )?.evaluate((el) => el.textContent);

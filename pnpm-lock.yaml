@@ -11,6 +11,7 @@ importers:
       buffer-es6: ^4.9.3
       cross-env: ^7.0.3
       execa: ^6.0.0
+      miniflare: ^1.4.1
       process-es6: ^0.11.6
       puppeteer: ^13.0.0
       rimraf: ^3.0.2
@@ -21,6 +22,8 @@ importers:
       utility-types: ^3.10.0
       vite: ^2.7.1
       vitest: ^0.0.97
+    dependencies:
+      miniflare: 1.4.1
     devDependencies:
       '@rollup/plugin-alias': 3.1.8_rollup@2.61.1
       '@rollup/plugin-commonjs': 21.0.1_rollup@2.61.1
@@ -53,6 +56,7 @@ importers:
       rollup-plugin-node-globals: ^1.4.0
       typescript: ^4.5.3
       vite: 2.7.0
+      vite-plugin-cloudflare: ^0.0.0
     dependencies:
       buffer-es6: 4.9.3
       cac: 6.7.12
@@ -61,6 +65,7 @@ importers:
       process-es6: 0.11.6
       rollup-plugin-node-builtins: 2.1.2
       rollup-plugin-node-globals: 1.4.0
+      vite-plugin-cloudflare: 'link:'
     devDependencies:
       '@types/rollup-plugin-node-builtins': 2.1.2
       '@types/rollup-plugin-node-globals': 1.4.1
@@ -107,6 +112,15 @@ importers:
       vite: 2.7.3
       vite-plugin-cloudflare: link:../../packages/vite-plugin-cloudflare
       vite-plugin-ssr: 0.3.37_vite@2.7.3
+
+  test/shim:
+    specifiers:
+      miniflare: ^1.4.1
+      vite-plugin-cloudflare: workspace:^0.0.0
+    dependencies:
+      vite-plugin-cloudflare: link:../../packages/vite-plugin-cloudflare
+    devDependencies:
+      miniflare: 1.4.1
 
 packages:
 
