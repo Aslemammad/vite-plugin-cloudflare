@@ -40,6 +40,8 @@ vpc -h
 ## Credits
 [Brillout](https://github.com/brillout/)
 
+[Viteflare](https://github.com/alloc/viteflare)
+
 [Cloudflare](https://workers.cloudflare.com/)
 
 [Miniflare](http://miniflare.dev/)
