@@ -17,7 +17,8 @@ const external = [
   'esbuild',
   'rollup-plugin-node-builtins',
   'rollup-plugin-node-globals',
-  'fs/promises'
+  'fs/promises',
+  'miniflare'
 ]
 
 export default [

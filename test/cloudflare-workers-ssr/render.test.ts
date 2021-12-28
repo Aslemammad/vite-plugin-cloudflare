@@ -37,9 +37,7 @@ describe("render", async () => {
     browser = await puppeteer.launch();
     page = await browser.newPage();
     server = mf.createServer();
-    server.listen(8787).on("connect", () => {
-      console.log("helo");
-    });
+    server.listen(8787)
   });
   afterAll(async () => {
     await browser.close();

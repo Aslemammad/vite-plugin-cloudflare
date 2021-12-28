@@ -14,7 +14,7 @@ beforeEach(() => {
   mf = new Miniflare();
 });
 
-test("basic", async () => {
+test("initial fetch", async () => {
   const res = await mf.dispatchFetch("http://localhost:8787");
 
   expect(await res.text()).toBe("hello world");
