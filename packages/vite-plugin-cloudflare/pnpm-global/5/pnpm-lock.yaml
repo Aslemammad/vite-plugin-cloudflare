@@ -1,0 +1,4 @@
+lockfileVersion: 5.3
+
+specifiers:
+  vite-plugin-cloudflare: ^0.0.0
