@@ -1,3 +1,4 @@
+import { endianness } from "os";
 import { dirname } from "path";
 import { fileURLToPath } from "url";
 import { beforeEach, expect, test } from "vitest";
@@ -16,16 +17,17 @@ beforeEach(() => {
 
 test("basic", async () => {
   const res = await mf.dispatchFetch("http://localhost:8787");
-  const body  = await res.text();
+  const body = await res.text();
 
   const obj = {
     __dirname: expect.any(String),
-    __filename: expect.any(String), 
+    __filename: expect.any(String),
     cwd: expect.any(String),
     global: !!global,
     Buffer: !!Buffer,
     process: !!process,
-  }
+    endianness: !!endianness,
+  };
 
   expect(JSON.parse(body)).toBe(obj);
 });

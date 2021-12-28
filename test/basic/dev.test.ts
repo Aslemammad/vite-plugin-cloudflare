@@ -44,7 +44,7 @@ describe("render", async () => {
       ],
       { cwd: __dirname, stdio: "inherit" }
     ).cancel;
-    await sleep(2000);
+    await sleep(3000);
 
     browser = await puppeteer.launch();
     page = await browser.newPage();
@@ -64,14 +64,14 @@ describe("render", async () => {
     editFile("./temp-handle.ts", (str) =>
       str.replace("hello world", "hello world 1")
     );
-    await sleep(100)
+    await sleep(200)
     await page.reload()
     expect(await page.content()).toContain("hello world 1");
 
     editFile("./temp-handle.ts", (str) =>
       str.replace("hello world 1", "hello world 2")
     );
-    await sleep(100)
+    await sleep(200)
     await page.reload()
     expect(await page.content()).toContain("hello world 2");
   });
