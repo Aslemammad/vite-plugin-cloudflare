@@ -87,7 +87,7 @@ importers:
     devDependencies:
       miniflare: 1.4.1
 
-  test/cloudflare-workers:
+  test/cloudflare-workers-ssr:
     specifiers:
       '@cloudflare/kv-asset-handler': ~0.2.0
       '@cloudflare/wrangler': ^1.19.5
