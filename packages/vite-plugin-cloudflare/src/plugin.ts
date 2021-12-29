@@ -14,5 +14,11 @@ export const plugin: Plugin = {
         return { path: newPath, namespace };
       }
     });
+    build.onResolve(
+      {
+        filter: /\?(raw)\b/,
+      },
+      ({ path }) => ({ path, external: true })
+    );
   },
 };
