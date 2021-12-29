@@ -70,8 +70,8 @@ cli
       });
 
       try {
-        // const mfServer = await miniflare.createServer();
-        // mfServer.listen(options.port);
+        const mfServer = await miniflare.createServer();
+        mfServer.listen(options.port);
 
         const root = process.cwd();
         server = await createServer({
