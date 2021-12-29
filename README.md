@@ -38,6 +38,11 @@ vpc -h
 ```
 And more examples in [test/](https://github.com/Aslemammad/vite-plugin-cloudflare/tree/main/test).
 
+## New features
+
+- `?raw` support like vitejs
+- "__STATIC_CONTENT_MANIFEST" as external
+
 ## Credits
 [Brillout](https://github.com/brillout/)
 

@@ -3,7 +3,10 @@
   "version": "0.0.1",
   "type": "module",
   "scripts": {
-    "shim": " esbuild src/shimmed.ts  --outfile=dist/shimmed.js --bundle --format=esm --platform=node --minify",
+    "shim": "pnpm run shim:Buffer && pnpm run shim:process && pnpm run shim:main",
+    "shim:main": " esbuild src/shimmed.ts  --outfile=dist/shimmed.js --bundle --format=esm --platform=node",
+    "shim:process": " esbuild src/shims/process.ts  --outfile=dist/process.js --format=esm --platform=node",
+    "shim:Buffer": " esbuild src/shims/Buffer.ts  --outfile=dist/Buffer.js --format=esm --platform=node",
     "build": "rimraf dist && pnpm run shim && rollup -c",
     "dev": "pnpm run shim && rollup -c --watch src",
     "typecheck": "tsc --noEmit"
@@ -22,6 +25,12 @@
     },
     "./shimmed": {
       "import": "./dist/shimmed.js"
+    },
+    "./process": {
+      "import": "./dist/process.js"
+    },
+    "./Buffer": {
+      "import": "./dist/Buffer.js"
     }
   },
   "files": [

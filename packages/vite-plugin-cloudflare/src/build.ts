@@ -4,7 +4,6 @@ import { readFile } from "fs/promises";
 import { fileURLToPath, resolve } from "mlly";
 import { plugin } from "./plugin";
 
-const root = process.cwd();
 export async function build(options: {
   output: string;
   input: string;
@@ -20,14 +19,14 @@ export async function build(options: {
     incremental: options.incremental,
     logLevel: options.debug ? "debug" : "info",
     external: ["__STATIC_CONTENT_MANIFEST"],
-    loader: { ".html": "text" },
     banner: {
-      // TODO: __filename should be /worker.js or output name, and not sysytem path
-      js: `${await readFile(shimFile, "utf8")}\n
-            globalThis.__filename = "${path.join(root, options.output)}";
-            globalThis.__dirname = "${path.dirname(
-              path.join(root, options.output)
-            )}";
+      // TODO: do transformation like rollup-plugin-node-globals and not injecting
+      js: `
+            (() => {
+              ${await readFile(shimFile, "utf8")}\n
+            })()
+            globalThis.__filename = "${path.join('/', options.output)}";
+            globalThis.__dirname = "/";
 
         `,
     },
@@ -37,6 +36,5 @@ export async function build(options: {
     target: "es2020",
     bundle: true,
     write: true,
-    minify: true,
   });
 }
