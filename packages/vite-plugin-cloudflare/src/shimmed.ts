@@ -15,8 +15,11 @@ globalThis.global =
     : {};
 // globalThis.process = __process_shim;
 // globalThis.Buffer = __Buffer_shim;
-  globalThis.process = require("process-es6");
-  globalThis.Buffer = require("buffer-es6").Buffer;
+globalThis.process = require("process-es6");
+globalThis.Buffer = require("buffer-es6").Buffer;
+globalThis.setImmediate = require('rollup-plugin-node-builtins/src/es6/timers').setImmediate
+globalThis.clearImmediate = require('rollup-plugin-node-builtins/src/es6/timers').clearImmediate
+
 // (() => {
 //   globalThis.process = require("process-es6");
 //   globalThis.Buffer = require("buffer-es6").Buffer;

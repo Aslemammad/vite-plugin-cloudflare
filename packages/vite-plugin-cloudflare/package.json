@@ -1,6 +1,6 @@
 {
   "name": "vite-plugin-cloudflare",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "type": "module",
   "scripts": {
     "shim": "pnpm run shim:Buffer && pnpm run shim:process && pnpm run shim:main",
@@ -50,12 +50,14 @@
   "devDependencies": {
     "@types/rollup-plugin-node-builtins": "^2.1.2",
     "@types/rollup-plugin-node-globals": "^1.4.1",
+    "miniflare": "^2.0.0-rc.4",
+    "setimmediate": "^1.0.5",
     "typescript": "^4.5.3",
     "vite": "2.7.0"
   },
   "peerDependencies": {
-    "vite": "^2.7.1",
-    "miniflare": "*"
+    "miniflare": "*",
+    "vite": "*"
   },
   "engines": {
     "node": ">=14.0.0"

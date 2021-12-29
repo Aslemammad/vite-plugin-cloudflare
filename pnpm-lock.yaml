@@ -56,11 +56,13 @@ importers:
       buffer-es6: ^4.9.3
       cac: ^6.7.12
       esbuild: ^0.14.6
+      miniflare: ^2.0.0-rc.4
       mlly: ^0.3.16
       picocolors: ^1.0.0
       process-es6: ^0.11.6
       rollup-plugin-node-builtins: ^2.1.2
       rollup-plugin-node-globals: ^1.4.0
+      setimmediate: ^1.0.5
       typescript: ^4.5.3
       vite: 2.7.0
       vite-plugin-cloudflare: ^0.0.0
@@ -77,6 +79,8 @@ importers:
     devDependencies:
       '@types/rollup-plugin-node-builtins': 2.1.2
       '@types/rollup-plugin-node-globals': 1.4.1
+      miniflare: 2.0.0-rc.4
+      setimmediate: 1.0.5
       typescript: 4.5.4
       vite: 2.7.0
 
@@ -433,7 +437,6 @@ packages:
       undici: 4.12.1
     transitivePeerDependencies:
       - '@miniflare/watcher'
-    dev: false
 
   /@miniflare/cli-parser/2.0.0-rc.4:
     resolution: {integrity: sha512-jFtG6Ib3fjLenEepKSGJXMUn1hTk1xsjDPVjBX4VNc7P75zMlgdWLmSJSh7qBZpWd4mCUr46MOTtdPXWrW8Opw==}
@@ -441,7 +444,6 @@ packages:
     dependencies:
       '@miniflare/shared': 2.0.0-rc.4
       kleur: 4.1.4
-    dev: false
 
   /@miniflare/core/2.0.0-rc.4_@miniflare+watcher@2.0.0-rc.4:
     resolution: {integrity: sha512-nORCqBpj2zqZdlHdTk8VePidCc6VMvd3b3qRqC5eA3/p9CMrpBtQbBx074tnxiRimWnl1lP41U2ucZevwjTGZg==}
@@ -460,7 +462,6 @@ packages:
       kleur: 4.1.4
       set-cookie-parser: 2.4.8
       undici: 4.12.1
-    dev: false
 
   /@miniflare/durable-objects/2.0.0-rc.4_@miniflare+watcher@2.0.0-rc.4:
     resolution: {integrity: sha512-Zyv0E71sIYa1OobAmgoaBNum0vzPI6rk6K9Ib5fnMpjx4IzFc+kt6MQq5mUiLUa4yEADmrDHrQ5X4Bqe9Is5lA==}
@@ -472,7 +473,6 @@ packages:
       undici: 4.12.1
     transitivePeerDependencies:
       - '@miniflare/watcher'
-    dev: false
 
   /@miniflare/html-rewriter/2.0.0-rc.4_@miniflare+watcher@2.0.0-rc.4:
     resolution: {integrity: sha512-KzQvG5r0KbMWctskH/1XIBT+YgQdHrXnYnK7nqJ3fhMjNO02xytlmGISHABV8WGCFYuWZglqTxOQPi17we8Ikw==}
@@ -484,7 +484,6 @@ packages:
       undici: 4.12.1
     transitivePeerDependencies:
       - '@miniflare/watcher'
-    dev: false
 
   /@miniflare/http-server/2.0.0-rc.4_@miniflare+watcher@2.0.0-rc.4:
     resolution: {integrity: sha512-ZxPfylDEa9RZkvTDzicbE0AYLoCBintQS2biGHLOiCpVCvSZej43XUs3A8KxSPN0adnz0KUzX58pcXQPU9CXuQ==}
@@ -502,21 +501,18 @@ packages:
       - '@miniflare/watcher'
       - bufferutil
       - utf-8-validate
-    dev: false
 
   /@miniflare/kv/2.0.0-rc.4:
     resolution: {integrity: sha512-jHkMS6VCadUlTrE4m+aCyrZS5VfQ0D3YhWJwFHWCtqAEItV0ggDN2+saCEoAW0YXzsiadlbuWJeAM4H11g1JNw==}
     engines: {node: '>=16.7'}
     dependencies:
       '@miniflare/shared': 2.0.0-rc.4
-    dev: false
 
   /@miniflare/runner-vm/2.0.0-rc.4:
     resolution: {integrity: sha512-eFOMVvhyHuI5JUOF4/8oyRId3zpKgY0xyN5Jk+7y/I3QiqSZFDFnO1hHPXHzlgimBawFEi0SzSsa5saJB2KFSQ==}
     engines: {node: '>=16.7'}
     dependencies:
       '@miniflare/shared': 2.0.0-rc.4
-    dev: false
 
   /@miniflare/scheduler/2.0.0-rc.4_@miniflare+watcher@2.0.0-rc.4:
     resolution: {integrity: sha512-PGzXSFavmLjxFz2WN6m2rO/HiFIxOLyxw4330AP6UJpGd/HP5tmTsF/aUGE5MjwKkgzQyk815nGZMvusR37fqA==}
@@ -527,7 +523,6 @@ packages:
       cron-schedule: 3.0.4
     transitivePeerDependencies:
       - '@miniflare/watcher'
-    dev: false
 
   /@miniflare/shared/2.0.0-rc.4:
     resolution: {integrity: sha512-bu59+0r+IxmuBmFDDELxJ8vaewuimaBylrkxMF5o+DaZmIXGmxzDmji2LLXT4oDjGHP4FN6Eex5pR0f5eDsjkQ==}
@@ -535,7 +530,6 @@ packages:
     dependencies:
       ignore: 5.2.0
       kleur: 4.1.4
-    dev: false
 
   /@miniflare/sites/2.0.0-rc.4:
     resolution: {integrity: sha512-qWFpvo3eQpPZOp58rzjbTVuB1xZULUpndaiKOp17+WrfXV1on0Y/ipgmFFDqTT5qMsWG14Y68CQeJCzF7ww36A==}
@@ -544,7 +538,6 @@ packages:
       '@miniflare/kv': 2.0.0-rc.4
       '@miniflare/shared': 2.0.0-rc.4
       '@miniflare/storage-file': 2.0.0-rc.4
-    dev: false
 
   /@miniflare/storage-file/2.0.0-rc.4:
     resolution: {integrity: sha512-wu9S71T4fpYm5JQmpA/P+LuWxPoWQwAzFVrN5eAQgx6T8846D/Dl9iBED4bgo+yJiVrlfwFCeojNsqfxziWz/g==}
@@ -552,21 +545,18 @@ packages:
     dependencies:
       '@miniflare/shared': 2.0.0-rc.4
       '@miniflare/storage-memory': 2.0.0-rc.4
-    dev: false
 
   /@miniflare/storage-memory/2.0.0-rc.4:
     resolution: {integrity: sha512-D/qbZR6JwLyp3uA/2A3UA5XqhnTe2SaSsY/Qw47EfwPicsPEVGQl4dwrVLobslA+mxYVabOMM4G/uCU5c3fI/Q==}
     engines: {node: '>=16.7'}
     dependencies:
       '@miniflare/shared': 2.0.0-rc.4
-    dev: false
 
   /@miniflare/watcher/2.0.0-rc.4:
     resolution: {integrity: sha512-94buFqkifFlTZtwu7DvgmmQzz9NA9YWMGMIfbsVmVMiugTa39topc0KnVrcvBKnkBjQpA8Vk8edkqsn5tXb4fg==}
     engines: {node: '>=16.7'}
     dependencies:
       '@miniflare/shared': 2.0.0-rc.4
-    dev: false
 
   /@miniflare/web-sockets/2.0.0-rc.4_@miniflare+watcher@2.0.0-rc.4:
     resolution: {integrity: sha512-d+TNVTu5IjW0mF39PgSodRYWhj//PzyouPiEZ2pH4SHJ+FXjwjgomAehtMh0GTab4SZwXOAhHYgKoH8fzhLt8g==}
@@ -580,7 +570,6 @@ packages:
       - '@miniflare/watcher'
       - bufferutil
       - utf-8-validate
-    dev: false
 
   /@mrbbot/node-fetch/4.6.0:
     resolution: {integrity: sha512-GTSOdhpiUnJ9a+XK90NUiqCqOmqXOUU4tqg8WbpZW+nEUTJ4dF3QZ4xhfWg5bqYPagIh/e9r5HxGrftzmulbmw==}
@@ -1273,7 +1262,6 @@ packages:
 
   /cron-schedule/3.0.4:
     resolution: {integrity: sha512-wEspID2dNPfWyh7t2ZvE4Izunzk20QacZg8oZcqfTrN1j5kImj0CEYT3ZGZo+KqGQUgRc9tKlEJmY4uFVt4ccA==}
-    dev: false
 
   /cross-env/7.0.3:
     resolution: {integrity: sha512-+/HKd6EgcQCJGh2PSjZuUitQBQynKor4wrFbRg4DtAgS1aWO+gU52xpH7M9ScGgXSYmAVS9bIJ8EzuaGw0oNAw==}
@@ -1402,7 +1390,6 @@ packages:
   /dotenv/10.0.0:
     resolution: {integrity: sha512-rlBi9d8jpv9Sf1klPjNfFAuWDjKLwTIJJ/VxtoTwIR6hnZxcEOQCZg2oIL3MWBYw5GpUDKOEnND7LXTbIpQ03Q==}
     engines: {node: '>=10'}
-    dev: false
 
   /dotenv/8.6.0:
     resolution: {integrity: sha512-IrPdXQsk2BbzvCBGBOTmmSH5SodmqZNt4ERAZDmW4CT+tL8VtvinqywuANaFu4bOMWki16nqf0e4oC0QIaDr/g==}
@@ -2117,7 +2104,6 @@ packages:
   /ignore/5.2.0:
     resolution: {integrity: sha512-CmxgYGiEPCLhfLnpPp1MoRmifwEIOgjcHXxOBjv7mY96c+eWScsOP9c112ZyLdWHi0FxHjI+4uVhKYp/gcdRmQ==}
     engines: {node: '>= 4'}
-    dev: false
 
   /import-meta-resolve/1.1.1:
     resolution: {integrity: sha512-JiTuIvVyPaUg11eTrNDx5bgQ/yMKMZffc7YSjvQeSMXy58DO2SQ8BtAf3xteZvmzvjYh14wnqNjL8XVeDy2o9A==}
@@ -2553,7 +2539,6 @@ packages:
     transitivePeerDependencies:
       - bufferutil
       - utf-8-validate
-    dev: false
 
   /minimalistic-assert/1.0.1:
     resolution: {integrity: sha512-UtJcAD4yEaGtjPezWuO9wC4nwUnVH/8/Im3yEHQP4b67cXlD/Qr9hdITCU1xDbSEXg2XKNaP8jsReV7vQd00/A==}
@@ -3224,7 +3209,10 @@ packages:
 
   /set-cookie-parser/2.4.8:
     resolution: {integrity: sha512-edRH8mBKEWNVIVMKejNnuJxleqYE/ZSdcT8/Nem9/mmosx12pctd80s2Oy00KNZzrogMZS5mauK2/ymL1bvlvg==}
-    dev: false
+
+  /setimmediate/1.0.5:
+    resolution: {integrity: sha1-KQy7Iy4waULX1+qbg3Mqt4VvgoU=}
+    dev: true
 
   /setprototypeof/1.2.0:
     resolution: {integrity: sha512-E5LDX7Wrp85Kil5bhZv46j8jOeboKq5JMmYM3gVGdGH8xFpPWXUMsNrlODCrkoxMEeNi/XZIwuRvY4XNwYMJpw==}
@@ -3491,7 +3479,6 @@ packages:
   /undici/4.12.1:
     resolution: {integrity: sha512-MSfap7YiQJqTPP12C11PFRs9raZuVicDbwsZHTjB0a8+SsCqt7KdUis54f373yf7ZFhJzAkGJLaKm0202OIxHg==}
     engines: {node: '>=12.18'}
-    dev: false
 
   /unpipe/1.0.0:
     resolution: {integrity: sha1-sr9O6FFKrmFltIF4KdIbLvSZBOw=}

@@ -14,6 +14,7 @@ export async function build(options: {
   const shimFile = fileURLToPath(
     await resolve("vite-plugin-cloudflare/shimmed")
   );
+
   return await esbuild.build({
     outfile: options.output,
     entryPoints: [options.input],
@@ -38,5 +39,6 @@ export async function build(options: {
     target: "es2020",
     bundle: true,
     write: true,
+    allowOverwrite: true,
   });
 }
