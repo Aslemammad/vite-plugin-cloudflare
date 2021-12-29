@@ -1,6 +1,6 @@
 {
   "name": "vite-plugin-cloudflare",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "type": "module",
   "scripts": {
     "shim": " esbuild src/shimmed.ts  --outfile=dist/shimmed.js --bundle --format=esm --platform=node --minify",
@@ -45,7 +45,8 @@
     "vite": "2.7.0"
   },
   "peerDependencies": {
-    "vite": "^2.7.1"
+    "vite": "^2.7.1",
+    "miniflare": "*"
   },
   "engines": {
     "node": ">=14.0.0"
@@ -54,7 +55,6 @@
     "buffer-es6": "^4.9.3",
     "cac": "^6.7.12",
     "esbuild": "^0.14.6",
-    "miniflare": "^1.4.1",
     "mlly": "^0.3.16",
     "picocolors": "^1.0.0",
     "process-es6": "^0.11.6",
