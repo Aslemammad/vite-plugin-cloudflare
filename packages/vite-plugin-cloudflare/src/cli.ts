@@ -11,8 +11,9 @@ const cli = cac("vite-plugin-cloudflare");
 cli
   .command("build <input> <output>", "build worker")
   .option("-d, --debug", "enable debugging", { default: false })
+  .option("-m, --minify", "enable minification", { default: false })
   .action(
-    async (input: string, output: string, options: { debug: boolean }) => {
+    async (input: string, output: string, options: { debug: boolean , minify: boolean }) => {
       try {
         console.log(`Building ${c.cyan(c.bold(input))}`);
 
@@ -21,6 +22,7 @@ cli
           input,
           incremental: false,
           debug: options.debug,
+          minify: options.minify,
         });
 
         console.log(`Built ${c.cyan(c.bold(output))}`);
@@ -35,17 +37,19 @@ cli
   .command("dev <input> <output>")
   .option("-p, --port <input>", "miniflare port", { default: 3000 })
   .option("-d, --debug", "enable debugging", { default: false })
+  .option("-m, --minify", "enable minification", { default: false })
   .action(
     async (
       input: string,
       output: string,
-      options: { port: number; debug: boolean }
+      options: { port: number; debug: boolean, minify: boolean }
     ) => {
       const { rebuild } = await build({
         output,
         input,
         incremental: true,
         debug: options.debug,
+        minify: options.minify,
       });
       console.log(`Built ${c.cyan(c.bold(output))}`);
 

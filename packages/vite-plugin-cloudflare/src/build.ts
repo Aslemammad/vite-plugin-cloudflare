@@ -9,6 +9,7 @@ export async function build(options: {
   input: string;
   incremental: boolean;
   debug: boolean;
+  minify: boolean;
 }) {
   const shimFile = fileURLToPath(
     await resolve("vite-plugin-cloudflare/shimmed")
@@ -17,6 +18,7 @@ export async function build(options: {
     outfile: options.output,
     entryPoints: [options.input],
     incremental: options.incremental,
+    minify: options.minify,
     logLevel: options.debug ? "debug" : "info",
     external: ["__STATIC_CONTENT_MANIFEST"],
     banner: {
@@ -25,7 +27,7 @@ export async function build(options: {
             (() => {
               ${await readFile(shimFile, "utf8")}\n
             })()
-            globalThis.__filename = "${path.join('/', options.output)}";
+            globalThis.__filename = "${path.join("/", options.output)}";
             globalThis.__dirname = "/";
 
         `,
