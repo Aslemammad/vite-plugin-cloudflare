@@ -11,7 +11,9 @@ execa("npm", ["run", "build"], { cwd: __dirname, stdio: "inherit" });
 let mf: Miniflare;
 
 beforeEach(() => {
-  mf = new Miniflare();
+  mf = new Miniflare({
+    scriptPath: "./dist/index.js",
+  });
 });
 
 test("initial fetch", async () => {

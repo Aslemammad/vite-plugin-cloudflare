@@ -4,7 +4,8 @@ import c from "picocolors";
 import { version } from "../package.json";
 import { createServer, ViteDevServer, Plugin } from "vite";
 import { build } from "./build";
-import { Miniflare } from "miniflare";
+import { Miniflare,updateCheck } from "miniflare";
+import { unlink } from "fs/promises";
 
 const cli = cac("vite-plugin-cloudflare");
 
@@ -38,16 +39,17 @@ cli
   );
 
 cli
-  .command("dev <input> <output>")
+  .command("dev <input>")
   .option("-p, --port <input>", "miniflare port", { default: 3000 })
   .option("-d, --debug", "enable debugging", { default: false })
   .option("-m, --minify", "enable minification", { default: false })
   .action(
     async (
       input: string,
-      output: string,
+      // output: string,
       options: { port: number; debug: boolean; minify: boolean }
     ) => {
+      const output = ".vpc/dev.js";
       const { rebuild } = await build({
         output,
         input,
@@ -55,7 +57,9 @@ cli
         debug: options.debug,
         minify: options.minify,
       });
-      console.log(`Built ${c.cyan(c.bold(output))}`);
+      console.log(
+        `Built ${c.cyan(c.bold(input))} in ${c.cyan(c.bold(output))}`
+      );
 
       let server: ViteDevServer;
       const miniflare = new Miniflare({
@@ -66,8 +70,8 @@ cli
       });
 
       try {
-        const mfServer = await miniflare.createServer();
-        mfServer.listen(options.port);
+        // const mfServer = await miniflare.createServer();
+        // mfServer.listen(options.port);
 
         const root = process.cwd();
         server = await createServer({
@@ -90,6 +94,7 @@ cli
                   // @ts-ignore
                   await miniflare?.reloadOptions();
                 } else if ("reload" in miniflare) {
+                  // @ts-ignore
                   await miniflare?.reload();
                 }
                 console.log(
@@ -113,9 +118,12 @@ cli
         console.error(c.red("Failed to start. \n" + String(e)));
         process.exit(1);
       }
-      process.on("beforeExit", () => {
+      process.on("beforeExit", async () => {
         rebuild?.dispose();
         miniflare.dispose();
+        if (!options.debug) {
+          await unlink(output);
+        }
       });
     }
   );

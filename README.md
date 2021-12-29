@@ -24,7 +24,7 @@ npm install -D vite-plugin-cloudflare
  
  ## Development
  ```
-  vpc dev input.ts worker.js 
+  vpc dev input.ts 
  ```
 
 Here you can navigate to `localhost:3000` and see the output of your worker. With every change to the related files, Esbuild is going to rebuild incrementally through the Vite server, then Miniflare reloads the script so you can check the new results by refreshing your browser or reloading your client.
@@ -41,7 +41,7 @@ And more examples in [test/](https://github.com/Aslemammad/vite-plugin-cloudflar
 ## New features
 
 - `?raw` support like vitejs
-- "__STATIC_CONTENT_MANIFEST" as external
+- `__STATIC_CONTENT_MANIFEST` as external
 
 ## Credits
 [Brillout](https://github.com/brillout/)
