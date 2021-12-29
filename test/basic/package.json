@@ -5,10 +5,8 @@
     "build": "rimraf dist/ && vite-plugin-cloudflare build ./index.ts ./dist/index.js",
     "run": "miniflare"
   },
-  "devDependencies": {
-    "miniflare": "^1.4.1"
-  },
   "dependencies": {
+    "miniflare": "^1.4.1",
     "vite-plugin-cloudflare": "workspace:latest"
   }
 }
