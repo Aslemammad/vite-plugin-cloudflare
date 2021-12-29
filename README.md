@@ -36,6 +36,7 @@ For seeing more options:
 ```
 vpc -h
 ```
+And more examples in [test/](https://github.com/Aslemammad/vite-plugin-cloudflare/tree/main/test).
 
 ## Credits
 [Brillout](https://github.com/brillout/)
