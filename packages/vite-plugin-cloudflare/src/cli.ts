@@ -13,7 +13,11 @@ cli
   .option("-d, --debug", "enable debugging", { default: false })
   .option("-m, --minify", "enable minification", { default: false })
   .action(
-    async (input: string, output: string, options: { debug: boolean , minify: boolean }) => {
+    async (
+      input: string,
+      output: string,
+      options: { debug: boolean; minify: boolean }
+    ) => {
       try {
         console.log(`Building ${c.cyan(c.bold(input))}`);
 
@@ -42,7 +46,7 @@ cli
     async (
       input: string,
       output: string,
-      options: { port: number; debug: boolean, minify: boolean }
+      options: { port: number; debug: boolean; minify: boolean }
     ) => {
       const { rebuild } = await build({
         output,
@@ -57,11 +61,12 @@ cli
       const miniflare = new Miniflare({
         watch: true,
         port: options.port,
+        scriptPath: output,
         // log: options.debug ? new ConsoleLog(true) : false,
       });
 
       try {
-        const mfServer = await miniflare.createServer()
+        const mfServer = await miniflare.createServer();
         mfServer.listen(options.port);
 
         const root = process.cwd();
@@ -81,7 +86,12 @@ cli
                 }
                 const start = performance.now();
                 await rebuild?.();
-                await miniflare.reloadOptions();
+                if ("reloadOptions" in miniflare) {
+                  // @ts-ignore
+                  await miniflare?.reloadOptions();
+                } else if ("reload" in miniflare) {
+                  await miniflare?.reload();
+                }
                 console.log(
                   `Reloading ${c.cyan(c.bold(file))}`,
                   c.gray(`${(performance.now() - start).toFixed(2)}ms`)
@@ -99,7 +109,10 @@ cli
             `http://localhost:${server.config.server.port}`
           )} for Vite`
         );
-      } catch (e: any) {}
+      } catch (e: any) {
+        console.error(c.red("Failed to start. \n" + String(e)));
+        process.exit(1);
+      }
       process.on("beforeExit", () => {
         rebuild?.dispose();
         miniflare.dispose();
