@@ -56,7 +56,6 @@ importers:
       buffer-es6: ^4.9.3
       cac: ^6.7.12
       esbuild: ^0.14.6
-      miniflare: ^1.4.1
       mlly: ^0.3.16
       picocolors: ^1.0.0
       process-es6: ^0.11.6
@@ -69,13 +68,12 @@ importers:
       buffer-es6: 4.9.3
       cac: 6.7.12
       esbuild: 0.14.6
-      miniflare: 1.4.1
       mlly: 0.3.16
       picocolors: 1.0.0
       process-es6: 0.11.6
       rollup-plugin-node-builtins: 2.1.2
       rollup-plugin-node-globals: 1.4.0
-      vite-plugin-cloudflare: 'link:'
+      vite-plugin-cloudflare: 0.0.0_vite@2.7.0
     devDependencies:
       '@types/rollup-plugin-node-builtins': 2.1.2
       '@types/rollup-plugin-node-globals': 1.4.1
@@ -85,7 +83,7 @@ importers:
   test/basic:
     specifiers:
       miniflare: ^1.4.1
-      vite-plugin-cloudflare: workspace:^0.0.0
+      vite-plugin-cloudflare: workspace:latest
     dependencies:
       vite-plugin-cloudflare: link:../../packages/vite-plugin-cloudflare
     devDependencies:
@@ -105,7 +103,7 @@ importers:
       react: ^17.0.2
       react-dom: ^17.0.2
       vite: ^2.7.2
-      vite-plugin-cloudflare: workspace:^0.0.0
+      vite-plugin-cloudflare: workspace:latest
       vite-plugin-ssr: 0.3.37
     dependencies:
       '@cloudflare/kv-asset-handler': 0.2.0
@@ -126,7 +124,7 @@ importers:
   test/shim:
     specifiers:
       miniflare: ^1.4.1
-      vite-plugin-cloudflare: workspace:^0.0.0
+      vite-plugin-cloudflare: workspace:latest
     dependencies:
       vite-plugin-cloudflare: link:../../packages/vite-plugin-cloudflare
     devDependencies:
@@ -3299,6 +3297,24 @@ packages:
   /vary/1.1.2:
     resolution: {integrity: sha1-IpnwLG3tMNSllhsLn3RSShj2NPw=}
     engines: {node: '>= 0.8'}
+    dev: false
+
+  /vite-plugin-cloudflare/0.0.0_vite@2.7.0:
+    resolution: {integrity: sha512-lyh4BDajF3JKCaAPmIqgae/tMx/SfLPgE0eJOeZgvDpo3BUbHPBbXTXhvXVZNT6n34ca0GqCQ17mB4wNfzSfww==}
+    engines: {node: '>=14.0.0'}
+    hasBin: true
+    peerDependencies:
+      vite: ^2.7.1
+    dependencies:
+      buffer-es6: 4.9.3
+      cac: 6.7.12
+      esbuild: 0.14.6
+      mlly: 0.3.16
+      picocolors: 1.0.0
+      process-es6: 0.11.6
+      rollup-plugin-node-builtins: 2.1.2
+      rollup-plugin-node-globals: 1.4.0
+      vite: 2.7.0
     dev: false
 
   /vite-plugin-import-build/0.1.2:
