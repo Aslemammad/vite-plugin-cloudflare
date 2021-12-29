@@ -35,6 +35,6 @@
     "vitest": "^0.0.118"
   },
   "dependencies": {
-    "miniflare": "^1.4.1"
+    "miniflare": "2.0.0-rc.4"
   }
 }

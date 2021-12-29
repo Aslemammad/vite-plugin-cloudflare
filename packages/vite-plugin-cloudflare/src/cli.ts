@@ -4,7 +4,7 @@ import c from "picocolors";
 import { version } from "../package.json";
 import { createServer, ViteDevServer, Plugin } from "vite";
 import { build } from "./build";
-import { ConsoleLog, Miniflare } from "miniflare";
+import { Miniflare } from "miniflare";
 
 const cli = cac("vite-plugin-cloudflare");
 
@@ -57,11 +57,12 @@ cli
       const miniflare = new Miniflare({
         watch: true,
         port: options.port,
-        log: options.debug ? new ConsoleLog(true) : false,
+        // log: options.debug ? new ConsoleLog(true) : false,
       });
 
       try {
-        miniflare.createServer().listen(options.port);
+        const mfServer = await miniflare.createServer()
+        mfServer.listen(options.port);
 
         const root = process.cwd();
         server = await createServer({
