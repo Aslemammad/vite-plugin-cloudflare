@@ -4,8 +4,9 @@ import c from "picocolors";
 import { version } from "../package.json";
 import { createServer, ViteDevServer, Plugin } from "vite";
 import { build } from "./build";
-import { Miniflare,updateCheck } from "miniflare";
+import { Miniflare } from "miniflare";
 import { unlink } from "fs/promises";
+import { BuildOptions, DevOptions } from "./types";
 
 const cli = cac("vite-plugin-cloudflare");
 
@@ -13,16 +14,18 @@ cli
   .command("build <input> <output>", "build worker")
   .option("-d, --debug", "enable debugging", { default: false })
   .option("-m, --minify", "enable minification", { default: false })
+  .option("--sourcemap", "enable sourcemaps", { default: false })
   .action(
     async (
       input: string,
       output: string,
-      options: { debug: boolean; minify: boolean }
+      options: BuildOptions
     ) => {
       try {
         console.log(`Building ${c.cyan(c.bold(input))}`);
 
         await build({
+          sourcemap: options.sourcemap,
           output,
           input,
           incremental: false,
@@ -43,14 +46,15 @@ cli
   .option("-p, --port <input>", "miniflare port", { default: 3000 })
   .option("-d, --debug", "enable debugging", { default: false })
   .option("-m, --minify", "enable minification", { default: false })
+  .option("--sourcemap", "enable sourcemaps", { default: false })
   .action(
     async (
       input: string,
-      // output: string,
-      options: { port: number; debug: boolean; minify: boolean }
+      options: DevOptions
     ) => {
       const output = ".vpc/dev.js";
       const { rebuild } = await build({
+        sourcemap: options.sourcemap,
         output,
         input,
         incremental: true,
@@ -66,6 +70,7 @@ cli
         watch: true,
         port: options.port,
         scriptPath: output,
+        sourceMap: options.sourcemap,
         // log: options.debug ? new ConsoleLog(true) : false,
       });
 

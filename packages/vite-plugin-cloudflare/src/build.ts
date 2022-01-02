@@ -10,12 +10,14 @@ export async function build(options: {
   incremental: boolean;
   debug: boolean;
   minify: boolean;
+  sourcemap: boolean;
 }) {
   const shimFile = fileURLToPath(
     await resolve("vite-plugin-cloudflare/shimmed")
   );
 
   return await esbuild.build({
+    sourcemap: options.sourcemap,
     outfile: options.output,
     entryPoints: [options.input],
     incremental: options.incremental,
