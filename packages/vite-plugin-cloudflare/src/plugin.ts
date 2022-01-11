@@ -6,9 +6,10 @@ import { Plugin } from "esbuild";
 export const plugin: Plugin = {
   name: "vite-plugin-cloudflare",
   async setup(build) {
-    const resolveBuiltins = builtins().resolveId!.bind(null as any) as (
-      importee: string
-    ) => string | undefined;
+    const resolveBuiltins = builtins({
+      crypto: true,
+      fs: true,
+    }).resolveId!.bind(null as any) as (importee: string) => string | undefined;
 
     build.onResolve({ filter: /.*/ }, async ({ path, namespace }) => {
       const newPath = resolveBuiltins(path);
@@ -36,7 +37,7 @@ export const plugin: Plugin = {
       }
       if (/buffer-es6/.test(path)) {
         return {
-          contents: BufferContent
+          contents: BufferContent,
         };
       }
       return;
@@ -53,8 +54,8 @@ export const plugin: Plugin = {
       },
       async ({ path }) => {
         return {
-          loader: 'text',
-          contents: await readFile(path.replace('?raw', ''), "utf-8"),
+          loader: "text",
+          contents: await readFile(path.replace("?raw", ""), "utf-8"),
         };
       }
     );
