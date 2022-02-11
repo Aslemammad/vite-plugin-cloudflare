@@ -22,7 +22,7 @@
     "buffer-es6": "^4.9.3",
     "esbuild": "^0.14.6",
     "express": "^4.17.1",
-    "miniflare": "^1.4.1",
+    "miniflare": "^2.3.0",
     "node-fetch": "^2.6.1",
     "process-es6": "^0.11.6",
     "react": "^17.0.2",

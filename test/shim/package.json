@@ -9,7 +9,7 @@
     "miniflare": "^1.4.1"
   },
   "dependencies": {
-    "vite-plugin-cloudflare": "workspace:latest",
-    "miniflare": "2.0.0-rc.4"
+    "miniflare": "^2",
+    "vite-plugin-cloudflare": "workspace:latest"
   }
 }
