@@ -44,9 +44,9 @@ cli
   .option("-d, --debug", "enable debugging", { default: false })
   .option("-m, --minify", "enable minification", { default: false })
   .option("--sourcemap", "enable sourcemaps", { default: false })
-  .option("-c, --wrangler-config", "enable wrangler-config", { default: false })
-  .option("--env", "enable env path", { default: false })
-  .option("--package", "enable package", { default: false })
+  .option("--wrangler-config", "load wrangler config automatically", { default: true })
+  .option("--env", "load env automatically", { default: true })
+  .option("--package", "load package.json automatically", { default: true })
   .action(async (input: string, options: DevOptions) => {
     const output = ".vpc/dev.js";
     const { rebuild } = await build({
