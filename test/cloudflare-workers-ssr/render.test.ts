@@ -8,7 +8,7 @@ const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
 async function autoRetry(test: () => void | Promise<void>): Promise<void> {
   const period = 100;
-  const numberOfTries = 1000 / period;
+  const numberOfTries = 5000 / period;
   let i = 0;
   while (true) {
     try {
@@ -33,11 +33,16 @@ describe("render", async () => {
   let server: Server;
   beforeAll(async () => {
     execa("npm", ["run", "build"], { cwd: __dirname, stdio: "inherit" });
-    mf = new Miniflare();
+    mf = new Miniflare({
+      scriptPath: "./dist/worker.js",
+      wranglerConfigPath: true,
+      packagePath: true,
+      envPath: true,
+    });
     browser = await puppeteer.launch();
     page = await browser.newPage();
-    server = mf.createServer();
-    server.listen(8787)
+    server = await mf.createServer();
+    server.listen(8787);
   });
   afterAll(async () => {
     await browser.close();
@@ -64,6 +69,7 @@ describe("render", async () => {
       }
       {
         await page.click("button");
+        await sleep(100);
         const buttonText = await (
           await page.$("button")
         )?.evaluate((el) => el.textContent);
@@ -92,7 +98,6 @@ describe("render", async () => {
       const h1Text = await (
         await page.$("h1")
       )?.evaluate((el) => el.textContent);
-      console.log(h1Text);
       expect(h1Text).toBe("Star Wars Movies");
     });
 

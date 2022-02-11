@@ -6,7 +6,7 @@
     "run": "miniflare"
   },
   "dependencies": {
-    "miniflare": "^1.4.1",
+    "miniflare": "^2.3.0",
     "vite-plugin-cloudflare": "workspace:latest"
   }
 }
