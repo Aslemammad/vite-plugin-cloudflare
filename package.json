@@ -26,6 +26,7 @@
     "esbuild-node-loader": "^0.6.5",
     "esno": "^0.14.1",
     "execa": "^6.0.0",
+    "fast-glob": "^3.2.11",
     "kill-port": "^1.6.1",
     "process-es6": "^0.11.6",
     "puppeteer": "^13.0.0",
