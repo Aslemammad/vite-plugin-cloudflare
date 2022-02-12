@@ -1,7 +1,5 @@
 # vite-plugin-cloudflare 🔥
 
-[![Discord](https://img.shields.io/discord/815937377888632913.svg?label=&logo=discord&logoColor=ffffff&color=7389D8&labelColor=6A7EC2)](https://discord.gg/Rhg9cEghMF)
-
 Vite-plugin-cloudflare is a software for transforming & bundling cloudflare workers with shimming [node globals](https://github.com/calvinmetcalf/rollup-plugin-node-globals) and [builtins](https://github.com/calvinmetcalf/rollup-plugin-node-builtins/)  like `process`, `os`, `stream` and plenty of other node functions and modules using **Esbuild** and **Vite**!
 
 - ⚡ Lightning builds
