@@ -43,6 +43,8 @@ cli
   .option("-p, --port <input>", "miniflare port", { default: 3000 })
   .option("-d, --debug", "enable debugging", { default: false })
   .option("-m, --minify", "enable minification", { default: false })
+  .option("-k, --kv <namespace>", "KV namespace to bind")
+  .option("--kv-persist [path]", "persist KV data (to optional path)")
   .option("--sourcemap", "enable sourcemaps", { default: false })
   .option("--wrangler-config", "load wrangler config automatically", { default: true })
   .option("--env", "load env automatically", { default: true })
@@ -68,6 +70,10 @@ cli
       wranglerConfigPath: options.wranglerConfigPath,
       packagePath: options.packagePath,
       envPath: options.envPath,
+      ...(options.kv ? {
+        kvNamespaces: Array.isArray(options.kv) ? options.kv : [options.kv],
+        kvPersist: options.kvPersist
+      } : {})
       // log: options.debug ? new ConsoleLog(true) : false,
     });
 
