@@ -44,6 +44,7 @@ cli
   .option("-m, --minify", "enable minification", { default: false })
   .option("--sourcemap", "enable sourcemaps", { default: false })
   .option("--wrangler-config", "load wrangler config automatically", { default: true })
+  .option("--env-path", "path to .env", { default: ".env" })
   .option("--package", "load package.json automatically", { default: true })
   .action(async (input: string, options: DevOptions) => {
     const output = ".vpc/dev.js";
