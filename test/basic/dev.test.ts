@@ -58,20 +58,20 @@ describe("render", async () => {
 
   test("auto refresh", async () => {
     await page.goto(url);
-    expect(await page.content()).toContain("hello world");
+    expect(await page.content()).toContain("hello world, from testing environment");
 
     editFile("./temp-handle.ts", (str) =>
       str.replace("hello world", "hello world 1")
     );
     await sleep(300)
     await page.reload()
-    expect(await page.content()).toContain("hello world 1");
+    expect(await page.content()).toContain("hello world 1, from testing environment");
 
     editFile("./temp-handle.ts", (str) =>
       str.replace("hello world 1", "hello world 2")
     );
     await sleep(300)
     await page.reload()
-    expect(await page.content()).toContain("hello world 2");
+    expect(await page.content()).toContain("hello world 2, from testing environment");
   });
 });
