@@ -19,5 +19,5 @@ beforeEach(() => {
 test("initial fetch", async () => {
   const res = await mf.dispatchFetch("http://localhost:8787");
 
-  expect(await res.text()).toBe("hello world");
+  expect(await res.text()).toBe("hello world, from testing environment");
 });
