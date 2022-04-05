@@ -1,10 +1,7 @@
 declare global {
-  var env: {
-    ENVIRONMENT: string;
-  }
+  var ENVIRONMENT: string;
 }
 
 export async function handleRequest() {
-  return new Response('hello world, from ' + env.ENVIRONMENT + ' environment');
+  return new Response("hello world, from " + ENVIRONMENT + " environment");
 }
-

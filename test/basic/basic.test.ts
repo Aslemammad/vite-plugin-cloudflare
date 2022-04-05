@@ -13,6 +13,7 @@ let mf: Miniflare;
 beforeEach(() => {
   mf = new Miniflare({
     scriptPath: "./dist/index.js",
+    envPath: '.env',
   });
 });
 
