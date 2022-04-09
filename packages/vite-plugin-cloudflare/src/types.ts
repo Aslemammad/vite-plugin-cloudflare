@@ -5,6 +5,8 @@ export interface Options {
   wranglerConfigPath: boolean;
   packagePath: boolean;
   envPath: boolean;
+  kv?: string[];
+  kvPersist?: boolean;
 }
 
 export interface DevOptions extends Options {
