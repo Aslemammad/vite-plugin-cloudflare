@@ -1,6 +1,6 @@
 {
   "name": "vite-plugin-cloudflare",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "type": "module",
   "scripts": {
     "shim": "pnpm run shim:Buffer && pnpm run shim:process && pnpm run shim:inherits && pnpm run shim:main",
