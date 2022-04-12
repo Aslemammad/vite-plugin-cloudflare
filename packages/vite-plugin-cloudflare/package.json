@@ -1,6 +1,6 @@
 {
   "name": "vite-plugin-cloudflare",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "type": "module",
   "scripts": {
     "shim": "pnpm run shim:Buffer && pnpm run shim:process && pnpm run shim:inherits && pnpm run shim:main",
@@ -60,7 +60,7 @@
     "setimmediate": "^1.0.5",
     "typescript": "^4.5.3",
     "vite": "2.7.0",
-    "vite-plugin-cloudflare": "workspace:^0.1.1",
+    "vite-plugin-cloudflare": "workspace:^0.1.1"
   },
   "peerDependencies": {
     "miniflare": "*",
