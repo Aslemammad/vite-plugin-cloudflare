@@ -46,7 +46,7 @@ cli
   .option("--kv-persist [path]", "persist KV data (to optional path)")
   .option("--sourcemap", "enable sourcemaps", { default: false })
   .option("--wrangler-config", "load wrangler config automatically", { default: true })
-  .option("--env-path", "path to .env", { default: ".env" })
+  .option("--env-path", "path to .env")
   .option("--package", "load package.json automatically", { default: true })
   .action(async (input: string, options: DevOptions) => {
     const output = ".vpc/dev.js";

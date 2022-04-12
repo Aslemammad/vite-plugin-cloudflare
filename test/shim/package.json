@@ -9,6 +9,7 @@
     "miniflare": "^1.4.1"
   },
   "dependencies": {
+    "@supabase/supabase-js": "^1.33.3",
     "miniflare": "^2",
     "vite-plugin-cloudflare": "workspace:latest"
   }

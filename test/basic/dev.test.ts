@@ -40,6 +40,8 @@ describe("render", async () => {
         "./temp-index.ts",
         "--port",
         "3000",
+        "--env-path",
+        ".env",
       ],
       { cwd: __dirname, stdio: "inherit" }
     ).cancel;
@@ -63,15 +65,15 @@ describe("render", async () => {
     editFile("./temp-handle.ts", (str) =>
       str.replace("hello world", "hello world 1")
     );
-    await sleep(300)
-    await page.reload()
+    await sleep(300);
+    await page.reload();
     expect(await page.content()).toContain("hello world 1");
 
     editFile("./temp-handle.ts", (str) =>
       str.replace("hello world 1", "hello world 2")
     );
-    await sleep(300)
-    await page.reload()
+    await sleep(300);
+    await page.reload();
     expect(await page.content()).toContain("hello world 2");
   });
 });

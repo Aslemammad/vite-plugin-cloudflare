@@ -29,6 +29,9 @@ test("basic", async () => {
     Buffer: !!Buffer,
     process: !!process,
     endianness: !!endianness,
+    XMLHttpRequest: true,
+    XMLHttpRequestUpload: true,
+    XMLHttpRequestEventTarget: true,
   };
 
   expect(JSON.parse(body)).toBe(obj);

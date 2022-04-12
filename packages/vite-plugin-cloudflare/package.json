@@ -3,9 +3,10 @@
   "version": "0.1.1",
   "type": "module",
   "scripts": {
-    "shim": "pnpm run shim:Buffer && pnpm run shim:process && pnpm run shim:main",
-    "shim:main": " esbuild src/shimmed.ts  --outfile=dist/shimmed.js --bundle --format=esm --platform=node",
+    "shim": "pnpm run shim:Buffer && pnpm run shim:process && pnpm run shim:inherits && pnpm run shim:main",
+    "shim:main": " esbuild src/shimmed.ts  --outfile=dist/shimmed.js --bundle --format=cjs --platform=node",
     "shim:process": " esbuild src/shims/process.ts  --outfile=dist/process.js --format=esm --platform=node",
+    "shim:inherits": " esbuild src/shims/inherits.ts  --outfile=dist/inherits.js --format=esm --platform=node",
     "shim:Buffer": " esbuild src/shims/Buffer.ts  --outfile=dist/Buffer.js --format=esm --platform=node",
     "build": "rimraf dist && pnpm run shim && rollup -c",
     "dev": "pnpm run shim && rollup -c --watch src",
@@ -29,6 +30,9 @@
     "./process": {
       "import": "./dist/process.js"
     },
+    "./inherits": {
+      "import": "./dist/inherits.js"
+    },
     "./Buffer": {
       "import": "./dist/Buffer.js"
     }
@@ -48,6 +52,8 @@
   },
   "homepage": "https://github.com/aslemammad/vite-plugin-cloudflare#readme",
   "devDependencies": {
+    "@esbuild-plugins/node-modules-polyfill": "^0.1.4",
+    "@esbuild-plugins/node-resolve": "^0.1.4",
     "@types/rollup-plugin-node-builtins": "^2.1.2",
     "@types/rollup-plugin-node-globals": "^1.4.1",
     "miniflare": "^2.3.0",
@@ -71,6 +77,8 @@
     "process-es6": "^0.11.6",
     "rollup-plugin-node-builtins": "^2.1.2",
     "rollup-plugin-node-globals": "^1.4.0",
-    "vite-plugin-cloudflare": "^0.0.0"
+    "stream-http": "^3.2.0",
+    "vite-plugin-cloudflare": "workspace:^0.1.1",
+    "xhr2": "^0.2.1"
   }
 }

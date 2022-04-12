@@ -12,6 +12,10 @@ export const plugin: Plugin = {
     }).resolveId!.bind(null as any) as (importee: string) => string | undefined;
 
     build.onResolve({ filter: /.*/ }, async ({ path, namespace }) => {
+      if (/inherits/.test(path)) {
+          return { path, namespace: "polyfill" };
+      }
+
       const newPath = resolveBuiltins(path);
       if (newPath) {
         if (/(process-es6|buffer-es6)/.test(newPath)) {
@@ -28,8 +32,17 @@ export const plugin: Plugin = {
       fileURLToPath(await resolve("vite-plugin-cloudflare/process")),
       "utf8"
     );
+    const inheritsContent = await readFile(
+      fileURLToPath(await resolve("vite-plugin-cloudflare/inherits")),
+      "utf8"
+    );
 
     build.onLoad({ filter: /.*/, namespace: "polyfill" }, async ({ path }) => {
+      if (/inherits/.test(path)) {
+        return {
+          contents: inheritsContent,
+        };
+      }
       if (/process-es6/.test(path)) {
         return {
           contents: processContent,
