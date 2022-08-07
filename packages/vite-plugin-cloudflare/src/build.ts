@@ -1,46 +1,37 @@
-import esbuild from "esbuild";
-import path from "path";
+import { build as esbuild, BuildOptions } from "esbuild";
+import { ESBuildOptions, ResolvedConfig } from "vite";
+import { plugin } from "./plugin";
+/* import path from "path";
 import { readFile } from "fs/promises";
 import { fileURLToPath, resolve } from "mlly";
-import { plugin } from "./plugin";
+import { plugin } from "./plugin"; */
 
-export async function build(options: {
-  output: string;
-  input: string;
-  incremental: boolean;
-  debug: boolean;
-  minify: boolean;
-  sourcemap: boolean;
-}) {
-  const shimFile = fileURLToPath(
-    await resolve("vite-plugin-cloudflare/shimmed")
-  );
-
-  return await esbuild.build({
-    sourcemap: options.sourcemap,
-    outfile: options.output,
-    entryPoints: [options.input],
-    incremental: options.incremental,
-    minify: options.minify,
-    logLevel: options.debug ? "debug" : "info",
-    external: ["__STATIC_CONTENT_MANIFEST"],
+export async function build(
+  workerFile: string,
+  dev: boolean,
+  config: ResolvedConfig
+) {
+  const outFile = config.build.outDir + "/worker.js";
+  const { rebuild, outputFiles } = await esbuild({
+    ...(config.esbuild as BuildOptions),
     banner: {
-      // TODO: do transformation like rollup-plugin-node-globals and not injecting
       js: `
             (() => {
-              ${await readFile(shimFile, "utf8")}\n
-            })()
-            globalThis.__filename = "${path.join("/", options.output)}";
-            globalThis.__dirname = "/";
-
+                globalThis.navigator = { userAgent: "Cloudflare-Workers" };
+            })();
         `,
     },
     plugins: [plugin],
+    incremental: dev,
+    entryPoints: [workerFile],
+    write: !dev,
+    bundle: true,
+    allowOverwrite: true,
     platform: "node",
     format: "esm",
     target: "es2020",
-    bundle: true,
-    write: true,
-    allowOverwrite: true,
+    outfile: outFile,
   });
+
+  return { rebuild, content: outputFiles?.[0].text, outFile };
 }

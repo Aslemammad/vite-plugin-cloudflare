@@ -1,5 +1,5 @@
 {
-  "main": "./dist/worker.js",
+  "main": "./dist/server/worker.js",
   "scripts": {
     "test": "vitest",
     "// For increased dev speed we use an Express.js dev server instead of wrangler": "",
@@ -11,8 +11,8 @@
     "// Build and deploy the worker to Cloudflare Workers": "",
     "deploy": "npm run build:vite && wrangler publish",
     "// Build scripts": "",
-    "build": "npm run build:vite && npm run build:worker",
-    "build:vite": "vite build && vite build --ssr",
+    "build": "npm run build:vite",
+    "build:vite": "vite build",
     "build:worker": "vite-plugin-cloudflare build worker/index.js dist/worker.js"
   },
   "dependencies": {
@@ -27,9 +27,9 @@
     "process-es6": "^0.11.6",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "vite": "^2.7.2",
+    "vite": "^3.0.4",
     "vite-plugin-cloudflare": "workspace:latest",
-    "vite-plugin-ssr": "0.3.37"
+    "vite-plugin-ssr": "0.4.18"
   },
   "// Needed for Yarn workspaces": "",
   "name": "cloudflare-workers",
