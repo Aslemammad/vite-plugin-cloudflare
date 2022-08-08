@@ -4,14 +4,15 @@ import {
   LogLevel,
   Miniflare,
   MiniflareOptions,
+  Plugins,
   RequestInit,
 } from "miniflare";
-// import { build, BuildInvalidate, BuildOptions } from "esbuild";
 import colors from "picocolors";
 import path from "path";
 import { fromResponse, toRequest } from "./utils";
 import { build } from "./build";
 import { BuildInvalidate } from "esbuild";
+import { MiniflareCore } from ".pnpm/@miniflare+core@2.6.0/node_modules/@miniflare/core";
 
 type Options = {
   miniflare?: Omit<MiniflareOptions, "script" | "watch">;
@@ -36,24 +37,6 @@ export default function vitePlugin(options: Options): Plugin {
         true,
         resolvedConfig
       );
-      /* const { rebuild, outputFiles } = await build({
-        ...server.config.esbuild as BuildOptions,
-        banner: {
-          js: `
-            (() => {
-                globalThis.navigator = { userAgent: "Cloudflare-Workers" };
-            })();
-        `,
-        },
-        plugins: [plugin],
-        incremental: true,
-        entryPoints: [workerFile],
-        write: false,
-        bundle: true,
-        platform: "node",
-        format: "esm",
-        target: "es2020",
-      }); */
       esbuildRebuild = rebuild!;
 
       mf = new Miniflare({
@@ -84,6 +67,7 @@ export default function vitePlugin(options: Options): Plugin {
           try {
             const mfRequest = toRequest(req);
 
+            // @ts-ignore
             const mfResponse = await mf.dispatchFetch(
               mfRequest.url,
               mfRequest as RequestInit
@@ -113,6 +97,7 @@ export default function vitePlugin(options: Options): Plugin {
 
       if (module?.file === workerFile || isImportedByWorkerFile) {
         const { outputFiles } = await esbuildRebuild();
+        // @ts-ignore
         await mf.setOptions({ script: outputFiles![0].text });
         server.ws.send({ type: "full-reload" });
         server.config.logger.info(colors.cyan(`🔥 [cloudflare] hot reloaded`));

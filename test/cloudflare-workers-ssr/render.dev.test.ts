@@ -1,8 +1,10 @@
 import type { Server } from "http";
 import { describe, afterAll, beforeAll, expect, test } from "vitest";
+import {createServer} from 'vite'
 import puppeteer from "puppeteer";
 import { execaSync as execa } from "execa";
 import { Miniflare } from "miniflare";
+import { ViteDevServer } from "vite";
 
 const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
@@ -24,25 +26,26 @@ async function autoRetry(test: () => void | Promise<void>): Promise<void> {
   }
 }
 
-describe("render", async () => {
+describe("render dev", async () => {
   const url = "http://localhost:8787";
-  let mf: Miniflare;
+  // let mf: Miniflare;
 
   let browser: puppeteer.Browser;
   let page: puppeteer.Page;
-  let server: Server;
+  let server: ViteDevServer;
   beforeAll(async () => {
-    execa("npm", ["run", "build"], { cwd: __dirname, stdio: "inherit" });
-    mf = new Miniflare({
+    // execa("npm", ["run", "build"], { cwd: __dirname, stdio: "inherit" });
+    /* mf = new Miniflare({
       scriptPath: "./dist/server/worker.js",
       wranglerConfigPath: true,
       packagePath: true,
       envPath: true,
-    });
+    }); */
+
     browser = await puppeteer.launch();
     page = await browser.newPage();
-    server = await mf.createServer();
-    server.listen(8787);
+    server = await createServer();
+    await server.listen(8787);
   });
   afterAll(async () => {
     await browser.close();

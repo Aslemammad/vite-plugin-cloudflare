@@ -1,5 +1,5 @@
+process.env.NODE_ENV = 'development'
 addEventListener("fetch", (event) => {
-  console.log(process.env.NODE_ENV);
   try {
     event.respondWith(
       handleFetchEvent(event).catch((err) => {
