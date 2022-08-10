@@ -18,6 +18,7 @@ export async function build(
         `,
     },
     plugins: [plugin],
+    external: ["__STATIC_CONTENT_MANIFEST"],
     incremental: dev,
     entryPoints: [workerFile],
     write: !dev,
