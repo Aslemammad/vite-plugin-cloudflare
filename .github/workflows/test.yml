@@ -41,12 +41,6 @@ jobs:
       - name: Build
         run: pnpm run build
 
-      - name: Test Miniflare@1
-        run: pnpm run test:ci:1
-
-      - name: Test Miniflare@2
-        run: pnpm run test:ci:2
-
       - name: Lint
         run: pnpm run lint --if-present
 

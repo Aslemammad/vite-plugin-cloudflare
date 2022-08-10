@@ -4,8 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "pnpm -r --filter {packages} run build",
-    "dev": "pnpm -r --parallel --filter {packages} run dev",
+    "build": "pnpm -r run --filter=./packages/** build",
     "test:core": "vitest -r test/basic",
     "test:all": "cross-env pnpm -r --stream run test --",
     "typecheck": "pnpm -r --parallel run typecheck",
