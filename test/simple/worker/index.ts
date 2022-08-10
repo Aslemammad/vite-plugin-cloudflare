@@ -1,23 +1,25 @@
 import { endianness } from "os";
 
 addEventListener("fetch", (event) => {
-  // @ts-ignore
+  const { pathname } = new URL(event.request.url);
   event.respondWith(handleRequest(event.request));
+  /* // we skip miniflare and let vite handle the url
+  event.respondWith(new Response("", { headers: { "x-skip-request": "" } })); */
 });
 
 async function handleRequest() {
   const obj = {
-    __dirname,
-    __filename,
+    __dirname: __dirname,
+    __filename: __filename,
     cwd: process.cwd(),
     global: !!global,
     Buffer: !!Buffer,
     process: !!process,
     endianness: !!endianness,
     // TODO: Don't work properly
-    XMLHttpRequest: !!XMLHttpRequest,
+    /* XMLHttpRequest: !!XMLHttpRequest,
     XMLHttpRequestUpload: !!XMLHttpRequestUpload,
-    XMLHttpRequestEventTarget: !!XMLHttpRequestEventTarget,
+    XMLHttpRequestEventTarget: !!XMLHttpRequestEventTarget, */
   };
   return new Response(JSON.stringify(obj));
 }

@@ -1,0 +1,8 @@
+# wrangler.toml
+name = "vite-ssr-worker"
+node_compat = true
+
+[site]
+bucket = "./dist"
+entry-point = "./dist/worker.js"
+

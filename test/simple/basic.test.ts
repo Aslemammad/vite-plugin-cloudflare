@@ -13,7 +13,7 @@ let mf: Miniflare;
 
 beforeEach(() => {
   mf = new Miniflare({
-    scriptPath: "./dist/index.js",
+    scriptPath: "./dist/worker.js",
   });
 });
 
@@ -29,9 +29,9 @@ test("basic", async () => {
     Buffer: !!Buffer,
     process: !!process,
     endianness: !!endianness,
-    XMLHttpRequest: true,
+    /* XMLHttpRequest: true,
     XMLHttpRequestUpload: true,
-    XMLHttpRequestEventTarget: true,
+    XMLHttpRequestEventTarget: true, */
   };
 
   expect(JSON.parse(body)).toBe(obj);

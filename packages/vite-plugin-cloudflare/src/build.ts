@@ -1,10 +1,6 @@
 import { build as esbuild, BuildOptions } from "esbuild";
-import { ESBuildOptions, ResolvedConfig } from "vite";
+import { ResolvedConfig } from "vite";
 import { plugin } from "./plugin";
-/* import path from "path";
-import { readFile } from "fs/promises";
-import { fileURLToPath, resolve } from "mlly";
-import { plugin } from "./plugin"; */
 
 export async function build(
   workerFile: string,

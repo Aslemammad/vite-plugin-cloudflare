@@ -56,7 +56,7 @@
     "@types/rollup-plugin-node-globals": "^1.4.1",
     "miniflare": "^2.6.0",
     "setimmediate": "^1.0.5",
-    "vite": "2.7.0",
+    "vite": "3.0.5",
     "vite-plugin-cloudflare": "workspace:^0.1.1"
   },
   "peerDependencies": {

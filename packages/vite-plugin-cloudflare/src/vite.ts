@@ -1,25 +1,24 @@
-import type { Plugin, Connect, ResolvedConfig } from "vite";
+import type { Connect, ResolvedConfig, PluginOption } from "vite";
 import {
   Log,
   LogLevel,
   Miniflare,
   MiniflareOptions,
-  Plugins,
   RequestInit,
 } from "miniflare";
 import colors from "picocolors";
 import path from "path";
 import { fromResponse, toRequest } from "./utils";
 import { build } from "./build";
-import { BuildInvalidate } from "esbuild";
-import { MiniflareCore } from ".pnpm/@miniflare+core@2.6.0/node_modules/@miniflare/core";
+import { BuildInvalidate, serve } from "esbuild";
 
 type Options = {
   miniflare?: Omit<MiniflareOptions, "script" | "watch">;
+  route?: string;
   scriptPath: string;
 };
 
-export default function vitePlugin(options: Options): Plugin {
+export default function vitePlugin(options: Options): PluginOption {
   let mf: Miniflare;
   let resolvedConfig: ResolvedConfig;
   let workerFile: string;
@@ -54,39 +53,39 @@ export default function vitePlugin(options: Options): Plugin {
         esbuildRebuild?.dispose();
       });
 
+      const mfMiddleware: Connect.NextHandleFunction = async (
+        req,
+        res,
+        next
+      ) => {
+        try {
+          const mfRequest = toRequest(req);
+
+          // @ts-ignore
+          const mfResponse = await mf.dispatchFetch(
+            mfRequest.url,
+            mfRequest as RequestInit
+          );
+
+          if (mfResponse.headers.has("x-skip-request")) {
+            throw undefined; // skip miniflare and pass to next middleware
+          }
+
+          await fromResponse(mfResponse, res);
+        } catch (e) {
+          if (e) {
+            console.error(e);
+          }
+          next(e);
+        }
+      };
+
+      server.middlewares.use(options.route ?? "", mfMiddleware);
+
       return async () => {
         // enable HMR analyzing by vite, so we have better track of the worker
         // file (deps, importers, ...)
         await server.transformRequest(workerFile);
-
-        const mfMiddleware: Connect.NextHandleFunction = async (
-          req,
-          res,
-          next
-        ) => {
-          try {
-            const mfRequest = toRequest(req);
-
-            // @ts-ignore
-            const mfResponse = await mf.dispatchFetch(
-              mfRequest.url,
-              mfRequest as RequestInit
-            );
-
-            if (mfResponse.headers.has("x-skip-request")) {
-              throw undefined; // skip miniflare and pass to next middleware
-            }
-
-            await fromResponse(mfResponse, res);
-          } catch (e) {
-            if (e) {
-              console.error(e);
-            }
-            next(e);
-          }
-        };
-
-        server.middlewares.use(mfMiddleware);
       };
     },
     async handleHotUpdate({ file, server }) {

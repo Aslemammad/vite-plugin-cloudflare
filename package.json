@@ -8,8 +8,6 @@
     "dev": "pnpm -r --parallel --filter {packages} run dev",
     "test:core": "vitest -r test/basic",
     "test:all": "cross-env pnpm -r --stream run test --",
-    "test:ci:1": "esmo scripts/miniflare.ts ^1 && cross-env CI=true pnpm -r --stream run test --",
-    "test:ci:2": "esmo scripts/miniflare.ts ^2 && cross-env CI=true pnpm -r --stream run test --",
     "typecheck": "pnpm -r --parallel run typecheck",
     "lint": "echo TODO"
   },
