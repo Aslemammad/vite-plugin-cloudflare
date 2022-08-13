@@ -1,5 +1,5 @@
 # wrangler.toml
-name = "vite-ssr-worker"
+name = "simple"
 node_compat = true
 
 [site]
