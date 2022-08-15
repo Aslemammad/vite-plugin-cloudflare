@@ -1,6 +1,6 @@
 # vite-plugin-cloudflare 🔥
 
-Vite-plugin-cloudflare is a software for transforming & bundling cloudflare
+Vite-plugin-cloudflare is a plugin for transforming & bundling cloudflare
 workers with shimming [modern node polyfills](https://github.com/Aslemammad/modern-node-polyfills) like `process`, `os`, `stream` and plenty of other node functions and modules using **Esbuild** and **Vite**!
 
 - Universal Vite plugin
