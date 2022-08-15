@@ -35,8 +35,6 @@ The plugin gets an options object with this type signature.
 type Options = {
   // miniflare specific options for development (optional)
   miniflare?: Omit<MiniflareOptions, "script" | "watch">;
-  // route string for the worker dev server (optional)
-  route?: string;
   // the worker file (required)
   scriptPath: string;
 };
