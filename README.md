@@ -39,6 +39,7 @@ type Options = {
   scriptPath: string;
 };
 ```
+
 Since this plugin works with Esbuild, options passed to the `esbuild` field of
 your vite plugin will affect the worker result, unless they are not compatible
 with the `BuildOptions` type of Esbuild.
@@ -93,6 +94,8 @@ compatibility_date = "2022-08-10"
 # If there is a `site` field then it must contain this `bucket` field.
 bucket = "./dist/client"
 ```
+
+> The values may change based on your build
 
 ## Skip Requests
 
