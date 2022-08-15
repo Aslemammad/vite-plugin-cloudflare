@@ -8,7 +8,7 @@ polyfills](https://github.com/Aslemammad/modern-node-polyfills) like `process`,
 - Universal Vite plugin
 - Lightning builds
 - Workers compatible build using shimming
-- Fast development incremental and HMR compatible reloads
+- Fast development and HMR compatible reloads
 - Builtin [Miniflare](https://miniflare.dev/) support
 
 ## Install
