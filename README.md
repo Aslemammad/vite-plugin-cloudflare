@@ -1,7 +1,9 @@
 # vite-plugin-cloudflare 🔥
 
 Vite-plugin-cloudflare is a plugin for transforming & bundling cloudflare
-workers with shimming [modern node polyfills](https://github.com/Aslemammad/modern-node-polyfills) like `process`, `os`, `stream` and other node functions and modules using **Esbuild** and **Vite**!
+workers with shimming [modern node
+polyfills](https://github.com/Aslemammad/modern-node-polyfills) like `process`,
+`os`, `stream` and other node global functions and modules using **Esbuild** and **Vite**!
 
 - Universal Vite plugin
 - Lightning builds
@@ -42,9 +44,9 @@ type Options = {
 
 ## Development
 
-You can start your Vite dev server and continue writing your applications. As
+You can start your Vite dev server and continue developing your applications. As
 previously mentioned, this plugin integrates Miniflare with Vite, so you'd have
-a nice experience writing to your workers.
+a nice experience writing your workers.
 
 ```
  vite dev
@@ -53,8 +55,8 @@ a nice experience writing to your workers.
 ## Build
 
 When building, the plugin is going to start bundling your worker at the end of
-the vite bundling phase and writes it into the `config.outDir` with the
-`worker.js` name.
+the vite bundling phase and generates it into the `config.outDir` with the
+`worker.js` file name.
 
 ```
  vite build
@@ -97,9 +99,8 @@ Vite has some builtin middlewares that handle different types of requests from t
 client, and in a Vite plugin, we can inject our middlewares along
 vite ones.
 Vite-plugin-cloudflare injects a middleware, that is responsible for handling
-the worker, to those middlewares, therefore,
-every request from the client (browser) may come to your worker
-first, before vite native middlewares, which these requests can be assets,
+the worker, So every request from the client (browser) may come to your worker
+first, before vite native middlewares. These requests can be assets,
 transforms and other types of vite-related requests that should not be handled by
 vite-plugin-cloudflare and instead, they should be handled by vite.
 
