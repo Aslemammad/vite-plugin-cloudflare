@@ -3,26 +3,22 @@
   "version": "0.1.3",
   "type": "module",
   "scripts": {
-    "shim": "pnpm run shim:Buffer && pnpm run shim:process && pnpm run shim:inherits && pnpm run shim:main",
-    "shim:main": " esbuild src/shimmed.ts  --outfile=dist/shimmed.js --bundle --format=cjs --platform=node",
-    "shim:process": " esbuild src/shims/process.ts  --outfile=dist/process.js --format=esm --platform=node",
-    "shim:inherits": " esbuild src/shims/inherits.ts  --outfile=dist/inherits.js --format=esm --platform=node",
-    "shim:Buffer": " esbuild src/shims/Buffer.ts  --outfile=dist/Buffer.js --format=esm --platform=node",
-    "build": "rimraf dist && pnpm run shim && rollup -c",
-    "dev": "pnpm run shim && rollup -c --watch src",
+    "build": "rimraf dist && rollup -c",
+    "dev": "rollup -c --watch src",
     "typecheck": "tsc --noEmit"
   },
   "bin": {
     "vite-plugin-cloudflare": "./bin/vite-plugin-cloudflare.mjs",
     "vpc": "./bin/vite-plugin-cloudflare.mjs"
   },
-  "main": "./dist/index.js",
-  "module": "./dist/index.js",
-  "types": "./dist/index.d.ts",
+  "main": "./dist/vite.js",
+  "module": "./dist/vite.js",
+  "types": "./dist/vite.d.ts",
   "exports": {
     ".": {
-      "import": "./dist/index.js",
-      "types": "./dist/index.d.ts"
+      "import": "./dist/vite.js",
+      "node": "./dist/vite.js",
+      "types": "./dist/vite.d.ts"
     },
     "./shimmed": {
       "import": "./dist/shimmed.js"
@@ -54,12 +50,13 @@
   "devDependencies": {
     "@esbuild-plugins/node-modules-polyfill": "^0.1.4",
     "@esbuild-plugins/node-resolve": "^0.1.4",
+    "@types/node": "^18.6.3",
+    "@types/node-fetch": "^2.6.2",
     "@types/rollup-plugin-node-builtins": "^2.1.2",
     "@types/rollup-plugin-node-globals": "^1.4.1",
-    "miniflare": "^2.3.0",
+    "miniflare": "^2.6.0",
     "setimmediate": "^1.0.5",
-    "typescript": "^4.5.3",
-    "vite": "2.7.0",
+    "vite": "3.0.5",
     "vite-plugin-cloudflare": "workspace:^0.1.1"
   },
   "peerDependencies": {
@@ -74,11 +71,14 @@
     "cac": "^6.7.12",
     "esbuild": "^0.14.6",
     "mlly": "^0.3.16",
+    "modern-node-polyfills": "^0.0.9",
+    "node-fetch": "^2.6.1",
     "picocolors": "^1.0.0",
     "process-es6": "^0.11.6",
     "rollup-plugin-node-builtins": "^2.1.2",
     "rollup-plugin-node-globals": "^1.4.0",
     "stream-http": "^3.2.0",
+    "undici": "^5.8.0",
     "xhr2": "^0.2.1"
   }
 }

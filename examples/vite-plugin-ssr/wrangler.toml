@@ -1,0 +1,10 @@
+# wrangler.toml
+name = "vite-ssr-worker"
+# node_compat = true
+main = "./dist/server/worker.js"
+compatibility_date = "2022-08-10"
+
+[site]
+bucket = "./dist/client"
+
+

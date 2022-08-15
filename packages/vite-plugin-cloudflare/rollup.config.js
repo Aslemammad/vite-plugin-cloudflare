@@ -7,7 +7,7 @@ import alias from '@rollup/plugin-alias'
 import pkg from './package.json'
 
 const entry = [
-  'src/cli.ts',
+  'src/vite.ts'
 ]
 
 const external = [
@@ -45,17 +45,17 @@ export default [
       }),
     ],
   },
-  // {
-  //   input: [
-  //     'src/index.ts',
-  //   ],
-  //   output: {
-  //     file: 'dist/index.d.ts',
-  //     format: 'esm',
-  //   },
-  //   external,
-  //   plugins: [
-  //     dts(),
-  //   ],
-  // },
+  {
+    input: [
+      'src/vite.ts',
+    ],
+    output: {
+      file: 'dist/vite.d.ts',
+      format: 'esm',
+    },
+    external,
+    plugins: [
+      dts(),
+    ],
+  },
 ]
