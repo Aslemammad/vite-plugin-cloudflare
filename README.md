@@ -99,6 +99,7 @@ bucket = "./dist/client"
 Vite has some builtin middlewares that handle different types of requests from the
 client, and in a Vite plugin, we can inject our middlewares along
 vite ones.
+
 Vite-plugin-cloudflare injects a middleware, that is responsible for handling
 the worker, So every request from the client (browser) may come to your worker
 first, before vite native middlewares. These requests can be assets,
