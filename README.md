@@ -89,9 +89,6 @@ main = "./dist/worker.js"
 compatibility_date = "2022-08-10"
 
 [site]
-# The directory containing your static assets.
-# It must be a path relative to your `wrangler.toml` file.
-# If there is a `site` field then it must contain this `bucket` field.
 bucket = "./dist/client"
 ```
 
