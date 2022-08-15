@@ -128,3 +128,11 @@ addEventListener("fetch", (event) => {
 The `x-skip-request` header enforces vite-plugin-cloudflare to skip the response of the worker and passes the
 request to the next vite middleware, so Vite would handle the request instead.
 
+## Authors
+
+| <a href="https://github.com/Aslemammad"> <img width='150' src="https://avatars.githubusercontent.com/u/37929992?v=4" /><br> Mohammad Bagher </a> |
+| ------------------------------------------------------------------------------------------------------------------------------------------------ |
+
+## Contributing
+
+Feel free to create issues/discussions and then PRs for the project!
