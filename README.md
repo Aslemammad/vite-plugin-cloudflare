@@ -104,7 +104,7 @@ first, before vite native middlewares. These requests can be assets,
 transforms and other types of vite-related requests that should not be handled by
 vite-plugin-cloudflare and instead, they should be handled by vite.
 
-> This concern only occurs in dev mode, so no worries when handling the production
+> This concern only occurs in dev mode, so no worries when building for production
 
 Here's how we handle these type of requests in vite-plugin-cloudflare.
 
