@@ -44,7 +44,7 @@ type Options = {
 
 You can start your Vite dev server and continue writing your applications. As
 previously mentioned, this plugin integrates Miniflare with Vite, so you'd have
-a nice experience writing your workers.
+a nice experience writing to your workers.
 
 ```
  vite dev
@@ -93,14 +93,14 @@ bucket = "./dist/client"
 
 ## Skip Requests
 
-Vite has some builtin middlewares that handle different types of request from the
-client, and in a Vite plugin, we are able to inject our own middlwares along
+Vite has some builtin middlewares that handle different types of requests from the
+client, and in a Vite plugin, we can inject our middlewares along
 vite ones.
 Vite-plugin-cloudflare injects a middleware, that is responsible for handling
-the worker, to those middlwares, therefore,
-it is possible that every request from the client (browser) comes to your worker
-first before vite native middlewares, which these request can be assets,
-transforms and other type of vite-related request that should not be handled by
+the worker, to those middlewares, therefore,
+every request from the client (browser) may come to your worker
+first, before vite native middlewares, which these requests can be assets,
+transforms and other types of vite-related requests that should not be handled by
 vite-plugin-cloudflare and instead, they should be handled by vite.
 
 > This concern only occurs in dev mode, so no worries when handling the production
