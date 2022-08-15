@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "build": "pnpm -r run --filter=./packages/** build",
-    "test:core": "vitest -r test/basic",
+    "test:core": "vitest -r examples/simple",
     "test:all": "cross-env pnpm -r --stream run test --",
     "typecheck": "pnpm -r --parallel run typecheck",
     "lint": "echo TODO"

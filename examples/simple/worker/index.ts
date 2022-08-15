@@ -2,9 +2,12 @@ import { endianness } from "os";
 
 addEventListener("fetch", (event) => {
   const { pathname } = new URL(event.request.url);
-  event.respondWith(handleRequest(event.request));
-  /* // we skip miniflare and let vite handle the url
-  event.respondWith(new Response("", { headers: { "x-skip-request": "" } })); */
+  if (pathname.startsWith("/api")) {
+    event.respondWith(handleRequest(event.request));
+    return;
+  }
+  // we skip miniflare and let vite handle the url
+  event.respondWith(new Response("", { headers: { "x-skip-request": "" } }));
 });
 
 async function handleRequest() {

@@ -18,7 +18,7 @@ beforeEach(() => {
 });
 
 test("basic", async () => {
-  const res = await mf.dispatchFetch("http://localhost:8787");
+  const res = await mf.dispatchFetch("http://localhost:8787/api");
   const body = await res.text();
 
   const obj = {
@@ -34,5 +34,6 @@ test("basic", async () => {
     XMLHttpRequestEventTarget: true, */
   };
 
+  console.log(body)
   expect(JSON.parse(body)).toBe(obj);
 });
