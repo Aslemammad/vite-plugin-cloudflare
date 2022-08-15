@@ -10,14 +10,12 @@ import colors from "picocolors";
 import path from "path";
 import { fromResponse, toRequest } from "./utils";
 import { build } from "./build";
-import { BuildInvalidate, serve } from "esbuild";
+import type { BuildInvalidate } from "esbuild";
 
 type Options = {
-	// miniflare specific options for development (optional)
+  // miniflare specific options for development (optional)
   miniflare?: Omit<MiniflareOptions, "script" | "watch">;
-	// route string for the worker dev server (optional)
-  route?: string;
-	// the worker file (required)
+  // the worker file (required)
   scriptPath: string;
 };
 
@@ -83,7 +81,7 @@ export default function vitePlugin(options: Options): PluginOption {
         }
       };
 
-      server.middlewares.use(options.route ?? "", mfMiddleware);
+      server.middlewares.use(mfMiddleware);
 
       return async () => {
         // enable HMR analyzing by vite, so we have better track of the worker
