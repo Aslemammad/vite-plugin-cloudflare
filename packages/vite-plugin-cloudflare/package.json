@@ -1,15 +1,11 @@
 {
   "name": "vite-plugin-cloudflare",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "type": "module",
   "scripts": {
     "build": "rimraf dist && rollup -c",
     "dev": "rollup -c --watch src",
     "typecheck": "tsc --noEmit"
-  },
-  "bin": {
-    "vite-plugin-cloudflare": "./bin/vite-plugin-cloudflare.mjs",
-    "vpc": "./bin/vite-plugin-cloudflare.mjs"
   },
   "main": "./dist/vite.js",
   "module": "./dist/vite.js",
