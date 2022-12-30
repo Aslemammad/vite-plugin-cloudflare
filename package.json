@@ -26,7 +26,7 @@
     "fast-glob": "^3.2.11",
     "kill-port": "^1.6.1",
     "process-es6": "^0.11.6",
-    "puppeteer": "^16.1.0",
+    "puppeteer": "^19.4.1",
     "rimraf": "^3.0.2",
     "rollup": "^2.61.1",
     "rollup-plugin-dts": "^4.2.2",
