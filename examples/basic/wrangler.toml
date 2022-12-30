@@ -1,8 +1,7 @@
 # wrangler.toml
 name = "simple"
-node_compat = true
+main = "./dist/worker.js"
+compatibility_date = "2022-08-10"
 
 [site]
 bucket = "./dist"
-entry-point = "./dist/worker.js"
-
