@@ -1,4 +1,4 @@
-# wrangler.toml
+# wrangler.toml (https://simple.zorofight94.workers.dev)
 name = "simple"
 main = "./dist/worker.js"
 compatibility_date = "2022-08-10"

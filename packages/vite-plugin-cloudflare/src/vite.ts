@@ -1,3 +1,5 @@
+// ignore in typescript
+// @ts-nocheck
 import type { Connect, ResolvedConfig, PluginOption } from "vite";
 import {
   Log,
@@ -10,7 +12,7 @@ import colors from "picocolors";
 import path from "path";
 import { fromResponse, toRequest } from "./utils";
 import { build } from "./build";
-import type { BuildInvalidate } from "esbuild";
+import type { BuildContext } from "esbuild";
 
 type Options = {
   // miniflare specific options for development (optional)
@@ -23,7 +25,7 @@ export default function vitePlugin(options: Options): PluginOption {
   let mf: Miniflare;
   let resolvedConfig: ResolvedConfig;
   let workerFile: string;
-  let esbuildRebuild: BuildInvalidate;
+  let esbuildRebuild: BuildContext['rebuild'];
   return {
     enforce: "post",
     name: "cloudflare",
@@ -32,7 +34,7 @@ export default function vitePlugin(options: Options): PluginOption {
       workerFile = path.resolve(config.root, options.scriptPath);
     },
     async configureServer(server) {
-      const { rebuild, content } = await build(
+      const { rebuild, content, dispose } = await build(
         workerFile,
         true,
         resolvedConfig
@@ -51,7 +53,7 @@ export default function vitePlugin(options: Options): PluginOption {
 
       process.on("beforeExit", async () => {
         await mf.dispose();
-        esbuildRebuild?.dispose();
+        dispose();
       });
 
       const mfMiddleware: Connect.NextHandleFunction = async (
@@ -86,7 +88,10 @@ export default function vitePlugin(options: Options): PluginOption {
       return async () => {
         // enable HMR analyzing by vite, so we have better track of the worker
         // file (deps, importers, ...)
-        await server.transformRequest(workerFile);
+        try {
+          // this may fail in custom server mode
+          await server.transformRequest(workerFile);
+        } catch {}
       };
     },
     async handleHotUpdate({ file, server }) {
@@ -106,13 +111,13 @@ export default function vitePlugin(options: Options): PluginOption {
       }
     },
     async closeBundle() {
-      const { outFile } = await build(workerFile, false, resolvedConfig);
+      const { outfile } = await build(workerFile, false, resolvedConfig);
 
       resolvedConfig.logger.info(
         colors.cyan(
           `🔥 [cloudflare] bundled worker file in '${path.relative(
             resolvedConfig.root,
-            outFile
+            outfile
           )}'`
         )
       );

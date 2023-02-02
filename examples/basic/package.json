@@ -12,7 +12,7 @@
   "devDependencies": {
     "miniflare": "^2.6.0",
     "typescript": "^4.6.4",
-    "vite": "^3.0.0",
+    "vite": "^4.0.3",
     "vite-plugin-cloudflare": "workspace:^0.1.3"
   },
   "dependencies": {
