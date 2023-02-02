@@ -19,8 +19,6 @@
     "@types/shelljs": "^0.8.10",
     "buffer-es6": "^4.9.3",
     "cross-env": "^7.0.3",
-    "esbuild": "^0.14.6",
-    "esbuild-node-loader": "^0.6.5",
     "esno": "^0.14.1",
     "execa": "^6.0.0",
     "fast-glob": "^3.2.11",
@@ -34,7 +32,7 @@
     "shelljs": "^0.8.4",
     "typescript": "^4.7.4",
     "utility-types": "^3.10.0",
-    "vite": "^2.7.1",
-    "vitest": "^0.0.118"
+    "vite": "^4.0.4",
+    "vitest": "^0.28.3"
   }
 }
