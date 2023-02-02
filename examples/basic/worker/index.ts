@@ -9,6 +9,7 @@ addEventListener("fetch", async (event) => {
     event.respondWith(handleRequest(event.request));
     return;
   }
+
   if (DEBUG) {
     // we skip miniflare and let vite handle the url
     event.respondWith(new Response("", { headers: { "x-skip-request": "" } }));

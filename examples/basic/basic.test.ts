@@ -34,6 +34,5 @@ test("basic", async () => {
     XMLHttpRequestEventTarget: true, */
   };
 
-  console.log(body)
-  expect(JSON.parse(body)).toBe(obj);
+  expect(JSON.parse(body)).toStrictEqual(obj);
 });
