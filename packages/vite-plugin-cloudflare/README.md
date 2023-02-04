@@ -14,7 +14,7 @@ polyfills](https://github.com/Aslemammad/modern-node-polyfills) like `process`,
 ## Install
 
 ```
-npm i --save-dev vite-plugin-cloudflare
+npm i --save-dev vite-plugin-cloudflare esbuild@latest
 ```
 
 ## Plugin
