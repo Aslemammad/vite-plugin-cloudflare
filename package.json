@@ -33,6 +33,7 @@
     "typescript": "^4.7.4",
     "utility-types": "^3.10.0",
     "vite": "^4.0.4",
+    "vite-plugin-cloudflare": "workspace:latest",
     "vitest": "^0.28.3"
   }
 }
