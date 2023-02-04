@@ -111,6 +111,9 @@ export default function vitePlugin(options: Options): PluginOption {
       }
     },
     async closeBundle() {
+      if (resolvedConfig.env.DEV) {
+        return
+      }
       const { outfile } = await build(workerFile, false, resolvedConfig);
 
       resolvedConfig.logger.info(

@@ -51,8 +51,7 @@
     "esbuild": "^0.17.5",
     "miniflare": "^2.6.0",
     "setimmediate": "^1.0.5",
-    "vite": "4.0.4",
-    "vite-plugin-cloudflare": "workspace:^0.1.1"
+    "vite": "4.0.4"
   },
   "peerDependencies": {
     "esbuild": "*",
