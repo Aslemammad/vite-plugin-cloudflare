@@ -59,6 +59,7 @@ importers:
       '@cloudflare/kv-asset-handler': ~0.2.0
       miniflare: ^2.6.0
       modern-node-polyfills: ^0.0.9
+      process: ^0.11.10
       typescript: ^4.6.4
       vite: ^4.0.3
     dependencies:
@@ -66,6 +67,7 @@ importers:
       modern-node-polyfills: 0.0.9
     devDependencies:
       miniflare: 2.6.0
+      process: 0.11.10
       typescript: 4.7.4
       vite: 4.0.3
 
@@ -113,7 +115,7 @@ importers:
       esbuild: ^0.17.5
       miniflare: ^2.6.0
       mlly: ^0.3.16
-      modern-node-polyfills: ^0.0.9
+      modern-node-polyfills: ^0.1.0
       node-fetch: ^2.6.1
       picocolors: ^1.0.0
       process-es6: ^0.11.6
@@ -128,7 +130,7 @@ importers:
       buffer-es6: 4.9.3
       cac: 6.7.12
       mlly: 0.3.16
-      modern-node-polyfills: 0.0.9
+      modern-node-polyfills: 0.1.0
       node-fetch: 2.6.7
       picocolors: 1.0.0
       process-es6: 0.11.6
@@ -1294,7 +1296,6 @@ packages:
     resolution: {integrity: sha512-xjIYgE8HBrkpd/sJqOGNspf8uHG+NOHGOw6a/Urj8taM2EXfdNAH2oFcPeIFfsv3+kz/mJrS5VuMqbNLjCa2vw==}
     engines: {node: '>=0.4.0'}
     hasBin: true
-    dev: true
 
   /agent-base/6.0.2:
     resolution: {integrity: sha512-RZNwNclF7+MS/8bDg70amg32dyeZGZxiDuQmZxKLAlQjr3jGyLx+4Kkk58UO7D2QdgFIQCovuSuZESne6RG6XQ==}
@@ -3317,6 +3318,17 @@ packages:
       rollup: 2.77.2
     dev: false
 
+  /modern-node-polyfills/0.1.0:
+    resolution: {integrity: sha512-/Z9mlC56KBxjLZvdNSLqSEFw9jSav43dsUxhLYLN3bZgcSX5VFdixat+QGjb/4NxaGCwW09ABJhZA5oHFj4W4A==}
+    dependencies:
+      '@jspm/core': 2.0.0-beta.24
+      '@rollup/plugin-inject': 4.0.4_rollup@2.77.2
+      acorn: 8.8.2
+      esbuild: 0.14.53
+      local-pkg: 0.4.2
+      rollup: 2.77.2
+    dev: false
+
   /ms/2.0.0:
     resolution: {integrity: sha512-Tpp60P6IUJDTuOq/5Z8cdskzJujfwqfOTkrwIwj7IRISpnkJnT6SyJ4PCPnGMoFjC9ddhal5KVIYtAt97ix05A==}
     dev: false
@@ -3590,6 +3602,11 @@ packages:
   /process-nextick-args/2.0.1:
     resolution: {integrity: sha512-3ouUOpQhtgrbOa17J7+uxOTpITYWaGP7/AhoR3+A+/1e9skrzelGi/dXzEYyvbxubEF6Wn2ypscTKiKJFFn1ag==}
     dev: false
+
+  /process/0.11.10:
+    resolution: {integrity: sha512-cdGef/drWFoydD1JsMzuFf8100nZl+GT+yacc2bEced5f9Rjk4z+WtFUTBu9PhOi9j/jfmBPu0mMEY4wIdAF8A==}
+    engines: {node: '>= 0.6.0'}
+    dev: true
 
   /progress/2.0.3:
     resolution: {integrity: sha512-7PiHtLll5LdnKIMw100I+8xJXR5gW2QwWYkT6iJva0bXitZKa/XMrSbdmg3r2Xnaidz9Qumd0VPaMrZlF9V9sA==}
