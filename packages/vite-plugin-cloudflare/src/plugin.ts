@@ -5,9 +5,11 @@ import { polyfillPath, polyfillGlobals } from "modern-node-polyfills";
 import { Plugin, transform } from "esbuild";
 import { dirname } from "path";
 
+export type PolyfilledGlobals = Parameters<typeof polyfillGlobals>[2]
+
 const isTS = (filename: string): boolean => /\.[cm]?ts$/.test(filename);
 
-export const plugin: Plugin = {
+export const plugin = (polyfilledModules: PolyfilledGlobals): Plugin => ({
   name: "vite-plugin-cloudflare",
   async setup(build) {
     build.onResolve({ filter: /.*/ }, async ({ path }) => {
@@ -28,9 +30,9 @@ export const plugin: Plugin = {
         contents: await polyfillGlobals(code, {
           __dirname: dirname(path),
           __filename: path,
-        }),
+        }, polyfilledModules),
         loader: isTSFile ? "ts" : "js",
       };
     });
   },
-};
+});

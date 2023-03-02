@@ -13,12 +13,15 @@ import path from "path";
 import { fromResponse, toRequest } from "./utils";
 import { build } from "./build";
 import type { BuildContext } from "esbuild";
+import { PolyfilledGlobals } from "./plugin";
 
-type Options = {
+export type Options = {
   // miniflare specific options for development (optional)
   miniflare?: Omit<MiniflareOptions, "script" | "watch">;
   // the worker file (required)
   scriptPath: string;
+  // customize globals that need to polyfilled (process, setTimeout, ...)
+  polyfilledGlobals?: PolyfilledGlobals
 };
 
 export default function vitePlugin(options: Options): PluginOption {
@@ -37,7 +40,8 @@ export default function vitePlugin(options: Options): PluginOption {
       const { rebuild, content, dispose } = await build(
         workerFile,
         true,
-        resolvedConfig
+        resolvedConfig,
+        options
       );
       esbuildRebuild = rebuild!;
 
@@ -114,7 +118,7 @@ export default function vitePlugin(options: Options): PluginOption {
       if (resolvedConfig.env.DEV) {
         return
       }
-      const { outfile } = await build(workerFile, false, resolvedConfig);
+      const { outfile } = await build(workerFile, false, resolvedConfig, options);
 
       resolvedConfig.logger.info(
         colors.cyan(

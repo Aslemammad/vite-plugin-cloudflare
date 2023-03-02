@@ -2,11 +2,13 @@ import type { BuildOptions, BuildContext } from "esbuild";
 import esbuild from "esbuild";
 import { ResolvedConfig } from "vite";
 import { plugin } from "./plugin";
+import type { Options } from "./vite";
 
 export async function build(
   workerFile: string,
   dev: true,
-  config: ResolvedConfig
+  config: ResolvedConfig,
+  options: Options
 ): Promise<{
   outfile: string;
   content: string;
@@ -17,13 +19,15 @@ export async function build(
 export async function build(
   workerFile: string,
   dev: false,
-  config: ResolvedConfig
+  config: ResolvedConfig,
+  options: Options
 ): Promise<{ outfile: string }>;
 
 export async function build(
   workerFile: string,
   dev: boolean,
-  config: ResolvedConfig
+  config: ResolvedConfig,
+  options: Options
 ): Promise<
   | {
       outfile: string;
@@ -45,7 +49,7 @@ export async function build(
     external: ["__STATIC_CONTENT_MANIFEST"],
     ...(config.esbuild as BuildOptions),
     sourcemap: 'inline',
-    plugins: [plugin],
+    plugins: [plugin(options?.polyfilledGlobals)],
     entryPoints: [workerFile],
     write: !dev,
     bundle: true,
