@@ -26,7 +26,7 @@ test("basic", async () => {
     __filename: expect.any(String),
     cwd: expect.any(String),
     global: !!global,
-    Buffer: !!Buffer,
+    Buffer: false, // disabled in vite.config.ts
     process: !!process,
     endianness: !!endianness,
     /* XMLHttpRequest: true,

@@ -7,5 +7,5 @@ export default defineConfig({
       DEBUG: `${process.env.NODE_ENV === "development"}`,
     }
   },
-  plugins: [vpc({ scriptPath: "./worker/index.ts" })],
+  plugins: [vpc({ scriptPath: "./worker/index.ts", polyfilledGlobals: { process: 'process/browser', Buffer: null} })],
 });

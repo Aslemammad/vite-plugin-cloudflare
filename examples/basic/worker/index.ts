@@ -25,7 +25,7 @@ async function handleRequest() {
     "__filename": __filename,
     cwd: process.cwd(),
     global: !!global,
-    Buffer: !!Buffer,
+    Buffer: !!globalThis.Buffer,
     process: !!process,
     endianness: !!endianness
   };
