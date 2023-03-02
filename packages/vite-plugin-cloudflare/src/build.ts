@@ -49,7 +49,7 @@ export async function build(
     external: ["__STATIC_CONTENT_MANIFEST"],
     ...(config.esbuild as BuildOptions),
     sourcemap: 'inline',
-    plugins: [plugin(options?.polyfilledGlobals)],
+    plugins: [plugin(options?.polyfilledModules, options?.polyfilledGlobals)],
     entryPoints: [workerFile],
     write: !dev,
     bundle: true,

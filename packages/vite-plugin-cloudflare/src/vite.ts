@@ -13,7 +13,7 @@ import path from "path";
 import { fromResponse, toRequest } from "./utils";
 import { build } from "./build";
 import type { BuildContext } from "esbuild";
-import { PolyfilledGlobals } from "./plugin";
+import { PolyfilledGlobals, PolyfilledModules } from "./plugin";
 
 export type Options = {
   // miniflare specific options for development (optional)
@@ -22,6 +22,8 @@ export type Options = {
   scriptPath: string;
   // customize globals that need to polyfilled (process, setTimeout, ...)
   polyfilledGlobals?: PolyfilledGlobals
+  // customize mods (node's builtinModules) that need to polyfilled (utils, http, ...)
+  polyfilledModules?: PolyfilledModules
 };
 
 export default function vitePlugin(options: Options): PluginOption {

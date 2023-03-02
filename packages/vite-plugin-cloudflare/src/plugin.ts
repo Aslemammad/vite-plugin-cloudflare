@@ -6,15 +6,16 @@ import { Plugin, transform } from "esbuild";
 import { dirname } from "path";
 
 export type PolyfilledGlobals = Parameters<typeof polyfillGlobals>[2]
+export type PolyfilledModules = Record<string, string>
 
 const isTS = (filename: string): boolean => /\.[cm]?ts$/.test(filename);
 
-export const plugin = (polyfilledModules: PolyfilledGlobals): Plugin => ({
+export const plugin = (polyfilledModules?: PolyfilledModules, polyfilledGlobals?: PolyfilledGlobals): Plugin => ({
   name: "vite-plugin-cloudflare",
   async setup(build) {
     build.onResolve({ filter: /.*/ }, async ({ path }) => {
       if (builtinModules.includes(path)) {
-        return { path: await polyfillPath(path), sideEffects: false };
+        return { path: polyfilledModules?.[path] || await polyfillPath(path), sideEffects: false };
       }
     });
 
@@ -30,7 +31,7 @@ export const plugin = (polyfilledModules: PolyfilledGlobals): Plugin => ({
         contents: await polyfillGlobals(code, {
           __dirname: dirname(path),
           __filename: path,
-        }, polyfilledModules),
+        }, polyfilledGlobals),
         loader: isTSFile ? "ts" : "js",
       };
     });

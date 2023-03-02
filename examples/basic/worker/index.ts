@@ -1,4 +1,6 @@
 import { endianness } from "os";
+// just to check if polyfilledModules work
+import util from 'util'
 import { handleStaticAssets } from "./static-assets";
 
 declare const DEBUG: boolean;
@@ -20,6 +22,7 @@ addEventListener("fetch", async (event) => {
 });
 
 async function handleRequest() {
+  util;
   const obj = {
     "__dirname": __dirname,
     "__filename": __filename,

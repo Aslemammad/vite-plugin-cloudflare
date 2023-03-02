@@ -5,7 +5,13 @@ export default defineConfig({
   esbuild: {
     define: {
       DEBUG: `${process.env.NODE_ENV === "development"}`,
-    }
+    },
   },
-  plugins: [vpc({ scriptPath: "./worker/index.ts", polyfilledGlobals: { process: 'process/browser', Buffer: null} })],
+  plugins: [
+    vpc({
+      scriptPath: "./worker/index.ts",
+      polyfilledGlobals: { process: "process/browser", Buffer: null },
+      polyfilledModules: { util: require.resolve("util/") },
+    }),
+  ],
 });
