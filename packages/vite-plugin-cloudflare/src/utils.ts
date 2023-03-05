@@ -8,7 +8,7 @@ export function toRequest(req: Connect.IncomingMessage): Request {
   return new Request(url.href, {
     headers: req.headers as Record<string, string>,
     method: req.method,
-    body: req.method === "GET" || req.method === "HEAD" ? undefined : req,
+    body: req.method === "GET" || req.method === "HEAD" ? undefined : req as any,
     duplex: "half"
   });
 }
