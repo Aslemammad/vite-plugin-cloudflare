@@ -37,6 +37,8 @@ type Options = {
   miniflare?: Omit<MiniflareOptions, "script" | "watch">;
   // the worker file (required)
   scriptPath: string;
+  // a fast-glob pattern for files who's changes should reload the server (optional)
+  workerFilesPattern?: string;
 };
 ```
 
