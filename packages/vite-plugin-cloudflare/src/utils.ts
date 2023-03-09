@@ -9,7 +9,8 @@ export function toRequest(req: Connect.IncomingMessage): Request {
     headers: req.headers as Record<string, string>,
     method: req.method,
     body: req.method === "GET" || req.method === "HEAD" ? undefined : req as any,
-    duplex: "half" as any
+    // @ts-ignore
+    duplex: "half" 
   });
 }
 
