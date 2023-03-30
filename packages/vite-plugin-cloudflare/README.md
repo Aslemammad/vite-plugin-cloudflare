@@ -32,11 +32,15 @@ export default defineConfig({
 The plugin gets an options object with this type signature.
 
 ```ts
-type Options = {
+export type Options = {
   // miniflare specific options for development (optional)
   miniflare?: Omit<MiniflareOptions, "script" | "watch">;
   // the worker file (required)
   scriptPath: string;
+  // customize globals that need to polyfilled (process, setTimeout, ...)
+  polyfilledGlobals?: PolyfilledGlobals;
+  // customize mods (node's builtinModules) that need to polyfilled (utils, http, ...)
+  polyfilledModules?: PolyfilledModules;
   // a fast-glob pattern for files who's changes should reload the server (optional)
   workerFilesPattern?: string;
 };
