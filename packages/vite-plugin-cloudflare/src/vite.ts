@@ -14,6 +14,7 @@ import { fromResponse, toRequest } from "./utils";
 import { build } from "./build";
 import type { BuildContext } from "esbuild";
 import { PolyfilledGlobals, PolyfilledModules } from "./plugin";
+import fg from "fast-glob";
 
 export type Options = {
   // miniflare specific options for development (optional)
@@ -21,15 +22,18 @@ export type Options = {
   // the worker file (required)
   scriptPath: string;
   // customize globals that need to polyfilled (process, setTimeout, ...)
-  polyfilledGlobals?: PolyfilledGlobals
+  polyfilledGlobals?: PolyfilledGlobals;
   // customize mods (node's builtinModules) that need to polyfilled (utils, http, ...)
-  polyfilledModules?: PolyfilledModules
+  polyfilledModules?: PolyfilledModules;
+  // a fast-glob pattern for files who's changes should reload the worker (optional)
+  workerFilesPattern?: string | string[];
 };
 
 export default function vitePlugin(options: Options): PluginOption {
   let mf: Miniflare;
   let resolvedConfig: ResolvedConfig;
   let workerFile: string;
+  let otherWorkerFiles: string[]
   let esbuildRebuild: BuildContext['rebuild'];
   return {
     enforce: "post",
@@ -37,6 +41,12 @@ export default function vitePlugin(options: Options): PluginOption {
     configResolved(config) {
       resolvedConfig = config;
       workerFile = path.resolve(config.root, options.scriptPath);
+      otherWorkerFiles = options.workerFilesPattern
+        ? fg.sync(options.workerFilesPattern, {
+            cwd: resolvedConfig.root,
+            absolute: true,
+          })
+        : []
     },
     async configureServer(server) {
       const { rebuild, content, dispose } = await build(
@@ -105,8 +115,9 @@ export default function vitePlugin(options: Options): PluginOption {
       const isImportedByWorkerFile = [...(module?.importers || [])].some(
         (importer) => importer.file === workerFile
       );
+      const isOtherWorkerFile = otherWorkerFiles.includes(file)
 
-      if (module?.file === workerFile || isImportedByWorkerFile) {
+      if (module?.file === workerFile || isImportedByWorkerFile || isOtherWorkerFile) {
         const { outputFiles } = await esbuildRebuild();
         // @ts-ignore
         await mf.setOptions({ script: outputFiles![0].text });
