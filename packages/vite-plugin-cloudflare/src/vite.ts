@@ -15,6 +15,7 @@ import { build } from "./build";
 import type { BuildContext } from "esbuild";
 import { PolyfilledGlobals, PolyfilledModules } from "./plugin";
 import fg from "fast-glob";
+import { hasESMSyntax } from "mlly";
 
 export type Options = {
   // miniflare specific options for development (optional)
@@ -62,6 +63,7 @@ export default function vitePlugin(options: Options): PluginOption {
         sourceMap: true,
         wranglerConfigPath: true,
         packagePath: false,
+        modules: hasESMSyntax(content),
         ...options.miniflare,
         script: content,
         watch: true,
