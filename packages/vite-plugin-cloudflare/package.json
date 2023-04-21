@@ -65,7 +65,6 @@
     "buffer-es6": "^4.9.3",
     "cac": "^6.7.12",
     "fast-glob": "^3.2.11",
-    "mlly": "^0.3.16",
     "modern-node-polyfills": "^0.1.0",
     "node-fetch": "^2.6.1",
     "picocolors": "^1.0.0",
