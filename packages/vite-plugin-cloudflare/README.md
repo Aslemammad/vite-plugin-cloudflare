@@ -41,8 +41,10 @@ export type Options = {
   polyfilledGlobals?: PolyfilledGlobals;
   // customize mods (node's builtinModules) that need to polyfilled (utils, http, ...)
   polyfilledModules?: PolyfilledModules;
-  // a fast-glob pattern for files who's changes should reload the server (optional)
-  workerFilesPattern?: string;
+  // a fast-glob pattern for files who's changes should reload the worker (optional)
+  workerFilesPattern?: string | string[];
+  // enable modules (esm)
+  modules?: boolean;
 };
 ```
 

@@ -15,7 +15,6 @@ import { build } from "./build";
 import type { BuildContext } from "esbuild";
 import { PolyfilledGlobals, PolyfilledModules } from "./plugin";
 import fg from "fast-glob";
-import { hasESMSyntax } from "mlly";
 
 export type Options = {
   // miniflare specific options for development (optional)
@@ -28,6 +27,8 @@ export type Options = {
   polyfilledModules?: PolyfilledModules;
   // a fast-glob pattern for files who's changes should reload the worker (optional)
   workerFilesPattern?: string | string[];
+  // enable modules (esm)
+  modules?: boolean;
 };
 
 export default function vitePlugin(options: Options): PluginOption {
@@ -63,7 +64,7 @@ export default function vitePlugin(options: Options): PluginOption {
         sourceMap: true,
         wranglerConfigPath: true,
         packagePath: false,
-        modules: hasESMSyntax(content),
+        modules: options.modules,
         ...options.miniflare,
         script: content,
         watch: true,
